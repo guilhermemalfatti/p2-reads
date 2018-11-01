@@ -1,3 +1,37 @@
+.option {
+    position: relative;
+    display: inline-block;
+}
+.option ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    top:25px;
+    right:0px;
+    width: 140px;
+    background-color: white;
+    font-weight:bold;
+    position: absolute;
+
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.option li a {
+    color: #000;
+    text-decoration: none;
+}
+.option li {
+    padding: 8px 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.option li:last-child {
+    border-bottom: none;
+}
+.option li:hover {
+    background-color: #e5e5e5;
+    color: white;
+}
+
 @media (max-width: 768px) {
     .container {
       padding: 30px;
@@ -531,6 +565,15 @@
     width: 200px;
   }
 
+
+  #post .hide-comments #new-comment {
+    display: none;
+  }
+
+  #post .hide-comments #new-comment + label {
+    width: 200px;
+  }
+
   #post .comments {
     margin: 5px 30px 0 110px;
   }
@@ -579,7 +622,22 @@
     height: auto;
   }
 
-  #post .comments .user-comment .reply {
+  #post .comments .user-comment .delete {
+    position: absolute;
+    color: #b4b9c8;
+    font-size: 12px;
+    font-weight: 500;
+    top: 25px;
+    right: 0;
+  }
+
+  #post .comments .user-comment .delete:hover {
+    color: #79829d;
+  }
+
+
+
+  #post .comments .user-comment .edit {
     position: absolute;
     color: #b4b9c8;
     font-size: 12px;
@@ -588,7 +646,7 @@
     right: 0;
   }
 
-  #post .comments .user-comment .reply:hover {
+  #post .comments .user-comment .edit:hover {
     color: #79829d;
   }
 

@@ -12,7 +12,12 @@ class PostsPage extends Component {
                         <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png"}/>
                         <p><a href="#" className="name">Daniel Svensson</a> uploaded a new photo to the album <a href="#">Beautiful
                                 Nature</a>.<span>20.04.2015 @ 12:00 PM</span></p>
-                        <div className="option"></div>
+                        <div className="option">
+                                <ul>
+                                    <li><a href="#edit">Edit</a></li>
+                                    <li><a href="#delete">Delete</a></li>
+                                </ul>
+                        </div>
                     </header>
 
                     <div className="content">
@@ -29,6 +34,9 @@ class PostsPage extends Component {
                     <div className="hide-comments">
                         <input type="checkbox" value="" id="hide-button" name="check" checked />
                         <label for="hide-button" className="button">Hide Comments</label>
+
+                        <input type="checkbox" value="" id="new-comment" name="check" checked />
+                        <label for="new-comment" className="button">New Comment</label>
                     </div>
 
                     <div className="comments">
@@ -40,7 +48,8 @@ class PostsPage extends Component {
                                     <div className="content">
                                         <p>This picture is absolutely amazing! You are such a good photographer :)</p>
                                     </div>
-                                    <a href="" className="reply">Reply</a>
+                                    <a href="" className="edit">edit</a>
+                                    <a href="" className="delete">delete</a>
                                 </div>
                             </li>
 
@@ -53,7 +62,8 @@ class PostsPage extends Component {
                                     <div className="content">
                                         <p>Wow!!! Cool shot, Daniel! You should post more often =)</p>
                                     </div>
-                                    <a href="" className="reply">Reply</a>
+                                    <a href="" className="edit">Edit</a>
+                                    <a href="" className="delete">Delete</a>
                                 </div>
                             </li>
                         </ul>
