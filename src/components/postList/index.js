@@ -14,7 +14,7 @@ class PostList extends Component {
 
     render() {
 
-        let { post, isLoading } = this.props
+        let { posts, isLoading } = this.props
 
         return (
             <div class="wrapper">
@@ -31,7 +31,7 @@ class PostList extends Component {
 
                     {isLoading == true ?
                         <Loading /> :
-                        post.posts.map((item) => (
+                        posts.map((item) => (
                             <Post postItem={item} />
                         ))
                     }
@@ -43,6 +43,6 @@ class PostList extends Component {
 }
 
 export default connect((state) => ({
-    post: state.post,
+    posts: state.posts,
     isLoading: state.loading.isLoading
 }))(PostList)

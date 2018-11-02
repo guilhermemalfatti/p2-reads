@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
-import { handlePost } from '../../actions/post';
+import { postVote } from '../../actions/post';
 
 import { connect } from 'react-redux';
 
@@ -9,24 +9,29 @@ class Post extends Component {
     defineColor = (votes) => {
         if (votes > 2) {
             return 'green';
-        } else if (votes > 0 && votes <= 2) {
+        } else if (votes >= 0 && votes <= 2) {
             return 'yellow';
         } else {
             return 'red';
         }
     }
 
+    vote = (postId, vote) => {
+        let { dispatch } = this.props;
+        dispatch(postVote(postId, vote));
+    }
+
     render() {
-        let { postItem } = this.props;
+        let { postItem, posts } = this.props;
         return (
-            <div class="question" data-color={this.defineColor(postItem.voteScore)}>
-                <div class="votes">
-                    <div class="upvote" ></div>
-                    <div class="number-of-votes">{postItem.voteScore}</div>
-                    <div class="downvote" ></div>
+            <div className="question" data-color={this.defineColor(postItem.voteScore)}>
+                <div className="votes">
+                    <div className="upvote" onClick={()=> this.vote(postItem.id, 'upVote')}></div>
+                    <div className="number-of-votes">{postItem.voteScore}</div>
+                    <div className="downvote" onClick={() => this.vote(postItem.id, 'downVote')}></div>
                 </div>
 
-                <div class="question-and-answer">
+                <div className="question-and-answer">
                     <a href="#">
                         <h2>{postItem.title}</h2>
                     </a>
@@ -38,4 +43,6 @@ class Post extends Component {
     }
 }
 
-export default connect()(Post)
+export default connect((state) => ({
+    posts: state.posts
+}))(Post)
