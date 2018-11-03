@@ -12,7 +12,7 @@ export const { Types, Creators } = createActions({
   editCommet: ['commetId'],
   deleteCommmet: ['commetId'],
 
-  initialData: ['posts'],
+  initialData: ['posts', 'filter'],
   requestData: null,
   dataReceived: null,
 

@@ -8,14 +8,14 @@ const INITIAL_STATE = {
 };
 
 const addPost = (state = INITIAL_STATE, action) => {
-  //TODO: ajudt it, *originalList*
+  //TODO: adjust it, *originalList*
   return [...state.posts, action.post]
 }
 
 const initialdata = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    items: action.posts,
+    items: action.filter ? action.posts.filter((item)=>item.category === action.filter) : action.posts,
     originalList: action.posts
   }
 }
@@ -88,6 +88,8 @@ const getPost = (state = INITIAL_STATE, action) => {
   }
 }
 
+
+
 const HANDLERS = {
   [Types.ADD_POST]: addPost,
   [Types.INITIAL_DATA]: initialdata,
@@ -95,7 +97,8 @@ const HANDLERS = {
   [Types.UP_VOTE]: upVote,
   [Types.SORT_POST]: sortPost,
   [Types.UPDATE_LIST]: updateList,
-  [Types.GET_POST]: getPost
+  [Types.GET_POST]: getPost,
+
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

@@ -13,11 +13,6 @@ class Posts extends Component {
         searchValue: ''
     }
 
-    componentDidMount() {
-        const { dispatch } = this.props
-        dispatch(receiveInitialData());
-    }
-
     selectFilter = (filter) => {
         this.setState(() => ({ sortByDesc: filter }));
         let { dispatch } = this.props;

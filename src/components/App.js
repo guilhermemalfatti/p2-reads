@@ -27,7 +27,7 @@ class App extends Component {
         <Route path={process.env.PUBLIC_URL + '/:category/:post_id'} component={PostsPage} />
 
         <Route exact path={process.env.PUBLIC_URL + '/'} component={Posts} />
-        <Route path={process.env.PUBLIC_URL + '/:category'} component={Posts} />
+        <Route exact path={process.env.PUBLIC_URL + '/:category'} component={Posts} />
 
       </div>
 

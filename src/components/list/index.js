@@ -10,7 +10,7 @@ let postDate = (timestamp) => {
 export default function List(props) {
     return (
         <React.Fragment>
-            {props.items.map((post) => (
+            {props.items && props.items.map((post) => (
                 <div className="question" data-color={props.color(post.voteScore)}>
                     <div className="votes">
                         <div className="upvote" onClick={() => props.vote(post.id, 'upVote')}></div>
