@@ -30,5 +30,5 @@ class Header extends Component {
 }
 
 export default connect((state) => ({
-    categories: state.categories.itens,
+    categories: state.categories.items,
 }))(Header)

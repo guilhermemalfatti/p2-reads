@@ -9,7 +9,8 @@ import ActionCreator from '../../actions/actionCreators';
 
 class Posts extends Component {
     state = {
-        sortByDesc: 'Sort by'
+        sortByDesc: 'Sort by',
+        searchValue: ''
     }
 
     componentDidMount() {
@@ -19,7 +20,7 @@ class Posts extends Component {
 
     selectFilter = (filter) => {
         this.setState(() => ({ sortByDesc: filter }));
-        let {dispatch} = this.props;
+        let { dispatch } = this.props;
 
         dispatch(ActionCreator.sortPost(filter));
     }
@@ -47,9 +48,34 @@ class Posts extends Component {
         }
     }
 
+    filterList = (event) => {
+        let { dispatch } = this.props;
+        var updatedList = this.props.originalPosts;
+
+        this.setState({
+            searchValue: event.target.value
+        });
+
+        updatedList = updatedList.filter(function (item) {
+            return item.title.toLowerCase().search(
+                event.target.value.toLowerCase()) !== -1;
+        });
+
+        dispatch(ActionCreator.updateList(updatedList));
+    }
+
+    resetFilter = () =>{
+        let { dispatch } = this.props;
+        this.setState({
+            searchValue: ''
+        });
+
+        dispatch(ActionCreator.updateList(this.props.originalPosts));
+    }
+
     render() {
-        const { sortByDesc } = this.state
-        let { posts, isLoading, } = this.props
+        const { sortByDesc } = this.state;
+        let { posts, isLoading, } = this.props;
 
         return (
             <div className="wrapper">
@@ -57,9 +83,9 @@ class Posts extends Component {
                     <div className="search-area">
                         <div className="input-wrapper">
                             <i className="fa fa-search"></i>
-                            <input type="text" placeholder="Have a question? Search for post by keywords" />
+                            <input value={this.state.searchValue} type="text" onChange={this.filterList} placeholder="Have a question? Search for post by keywords" />
                         </div>
-                        <button >Reset</button>
+                        <button onClick={this.resetFilter}>Reset</button>
                         <button >ADD</button>
                         <div className="dropdown">
                             <button className="dropbtn">{sortByDesc}<span className="caret"></span></button>
@@ -80,6 +106,7 @@ class Posts extends Component {
                             color={this.defineColor}
                         />
                     }
+
                 </div>
             </div>
         )
@@ -87,6 +114,7 @@ class Posts extends Component {
 }
 
 export default connect((state) => ({
-    posts: state.posts,
+    posts: state.posts.items,
+    originalPosts: state.posts.originalList,
     isLoading: state.loading.isLoading
 }))(Posts)

@@ -15,6 +15,8 @@ export const { Types, Creators } = createActions({
 
   receiveCategories: ['categories'],
 
-  sortPost: ['term']
+  sortPost: ['term'],
+
+  updateList: ['posts']
 })
 export default Creators

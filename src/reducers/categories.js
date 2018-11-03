@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 const receivecategories = (state = INITIAL_STATE, action) => {
     return {
         ...state,
-        itens: action.categories
+        items: action.categories
     }
 }
 
