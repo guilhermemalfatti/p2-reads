@@ -505,7 +505,7 @@
     margin-top: 7px 0 0 0;
   }
 
-  #post .content #social .post-comments, #post .content #social .likes {
+  #post .content #social .post-comments, #post .content #social  {
     display: inline-block;
     cursor: pointer;
     font-size: 14px;
@@ -528,13 +528,6 @@
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAB1ElEQVQoU41SPUubYRQ9940VsbZSo9jBUewfsNqlQwYHbf1IxEwOimuhiwkqDpFSRWMQf4HQbn6l9aM1Ii4OYqGLLi116+ZXpakiGt/bc6ORCCb4wMN733Pvufc853kEWSs0rU+lEG9U0UK4xlIK/BBg0S3AZKxZDjLlxK5W+LO2qIsPDEuzm2XFScbdUb/MGZYmXpPmGXo4IeEAUTj45hbBdc5Qx4ZvmWu9EoAOI0vfkj65vMAugTJ2GRrzS+SuiaG4DhJ/R+Y/x8EzCX3SAfZ5T3CNnRpyyEzDJC/w00wPRo24SeILF2iK+eVrPiKP5KPsddbsCLvsMahgl8rxgFicc5H4iMS/LDg3olnsLVCUjwTkMB8xMq0lJw+QtHMacYvFdZTbGA3Iyr2kKraNmHaL+wvNeXVvc/rn1ZsS/DS51P96vF2W7yKH49pPicM312FFvXH9xTusprO1dPZ7htib0Ic4xXPm7AG0casIgmNtMivhOa1SB78JHl8q6j2CRrsr7pfchVnTk/Shhz7MGCac1smOHxlzIB/a7XVCabuOYMlzjsmRoOxn0mbOFH+6roE/lJLgnS6kLpCYCMpRLrOMuMrktjhYLn6MjYhPUvmczeT+A4fJvvz+AN2wAAAAAElFTkSuQmCC) center no-repeat;
   }
 
-  #post .content #social .likes {
-    margin-left: 20px;
-  }
-
-  #post .content #social .likes:before {
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAOCAYAAAAmL5yKAAACDklEQVQoU41SS2tTURA+cxObVptHE4oUQXAh+AMUuiilC3XvI5ZKxYoLsXLuaUsjrkpwJbTYnnux4EIEFYSk1L0KFkWEgnt3giBFJa+bal/JnX4nJHqNpXhguDPzfeebmTOXBA6n06FqX59iIW4gPMZEn0iIubjWTwzu2fZVYLfhHod9BvYwuramKZ+vEwCq2nYO34uG3HbcZizbAYgsRR3nEnlSjqHiYxAKxHxtq6trJbK5OQzBReQONC/uENHNrUgkF9nYGGryUxAZo4ptvwNpQBBdQcvPWpXKSqUh+LwxohCXE46Ta2EVpUYF81PceW8E1gEcqjHHU67rBVstS3nWxAnXfRnMF6SMhYkqyP0yAj/hHBShUCo+P1/c4x3+SVUmJ5OiXi+0BFbhnMI852OO8+J/BLCVcxhrGdxVQjCNYBbBx1gy2U/ZbG0/Ec5mw16p9AFvcBJFM/R9fLy7Ixw2ez8CoTk8VmY/gbJtz4Jrin7drtVOwBeiqtSgz/wKbgfsPjrJoBM/KITKllcsmk6nYNsW0Zmo1m8bAuZgbRewNrPGTtjrOtH1pNZfDFZU6miI+RHc0+Yy/oPRhNZ5g/0WMIGn1AAzL8E9DFtHm/eapDv4dsO+oa2RHsd50yr8l0BjHCl7UeEBLqeDI4CYR4e3oq77oy0fDP/4pYmJIcv375qMb1kzPQsLK3sxdwG0nMX1tq20XgAAAABJRU5ErkJggg==) center no-repeat;
-  }
 
   #post .hide-comments {
     position: relative;

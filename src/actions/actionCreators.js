@@ -11,6 +11,10 @@ export const { Types, Creators } = createActions({
   editCommet: ['commetId'],
   deleteCommmet: ['commetId'],
 
-  initialData: ['posts']
+  initialData: ['posts'],
+
+  receiveCategories: ['categories'],
+
+  sortPost: ['term']
 })
 export default Creators

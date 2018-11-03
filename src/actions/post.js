@@ -8,9 +8,13 @@ const options = { headers: { "Authorization": token } };
 
 export function postVote(postId, vote) {
     return (dispatch) => {
-        return axios.post(API_ENDPOINT.READABLE_STARTER + '/posts/' + postId, {"option": vote}, options).then((res) => {
-            dispatch(ActionCreator.downVote(postId));
-        }).catch((err) => alert('There was an error, refresh the page and try again.' + err))
+        //that aims to avoid an if/else statement
+        dispatch(ActionCreator[vote](postId));
+
+        return axios.post(
+            API_ENDPOINT.READABLE_STARTER + '/posts/' + postId,
+            {"option": vote},
+            options).catch((err) => alert('There was an error, the data is inconsistent, refresh the page and try again' + err))
     }
 }
 

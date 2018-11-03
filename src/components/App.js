@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Header from './header/index'
-import PostList from './postList/index'
+import Posts from './posts/index'
 import PostsPage from './postPage/index'
 import { Route } from 'react-router-dom';
+
+
 
 class App extends Component {
   render() {
@@ -14,7 +16,7 @@ class App extends Component {
         )}
         />
         <Route exact path={process.env.PUBLIC_URL + '/'} render={() => (
-          <PostList/>
+          <Posts/>
         )}
         />
 

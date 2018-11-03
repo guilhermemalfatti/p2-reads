@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import './index.css';
+import getCategories from '../../actions/categories';
+import { connect } from 'react-redux';
 
 class Header extends Component {
 
+    componentDidMount() {
+        const { dispatch } = this.props
+        dispatch(getCategories());
+    }
+
     render() {
+        let { categories } = this.props;
         return (
             <div id="categories-list" class="carousel slide" data-ride="carousel">
 
                 <div class="carousel-wrapper">
                     <h2>Categories</h2>
                     <ol class="carousel-indicators">
-                        <span >Tiger</span>
-                        <span  class="active">Balloon</span>
-                        <span  >Tree</span>
+                        {categories && categories.map((cat)=>(
+                        <span >{cat.name}</span>
+                        ))}
                     </ol>
                 </div>
 
@@ -21,4 +29,6 @@ class Header extends Component {
     }
 }
 
-export default Header
+export default connect((state) => ({
+    categories: state.categories.itens,
+}))(Header)

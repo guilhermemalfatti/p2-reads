@@ -1,0 +1,39 @@
+.author {
+  font-style: italic;
+}
+.question-and-answer p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .question  .social {
+    width: 100%;
+    text-align: right;
+    margin-top: 7px 0 0 0;
+  }
+
+  .question  .social .post-comments, .question  .social  {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    color: #727988;
+  }
+
+  .question  .social .post-comments:before, .question  .social .likes:before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+    background-size: 16px;
+    margin-right: 5px;
+  }
+
+  .question  .social .post-comments:before {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAYAAAAmlE46AAAB1ElEQVQoU41SPUubYRQ9940VsbZSo9jBUewfsNqlQwYHbf1IxEwOimuhiwkqDpFSRWMQf4HQbn6l9aM1Ii4OYqGLLi116+ZXpakiGt/bc6ORCCb4wMN733Pvufc853kEWSs0rU+lEG9U0UK4xlIK/BBg0S3AZKxZDjLlxK5W+LO2qIsPDEuzm2XFScbdUb/MGZYmXpPmGXo4IeEAUTj45hbBdc5Qx4ZvmWu9EoAOI0vfkj65vMAugTJ2GRrzS+SuiaG4DhJ/R+Y/x8EzCX3SAfZ5T3CNnRpyyEzDJC/w00wPRo24SeILF2iK+eVrPiKP5KPsddbsCLvsMahgl8rxgFicc5H4iMS/LDg3olnsLVCUjwTkMB8xMq0lJw+QtHMacYvFdZTbGA3Iyr2kKraNmHaL+wvNeXVvc/rn1ZsS/DS51P96vF2W7yKH49pPicM312FFvXH9xTusprO1dPZ7htib0Ic4xXPm7AG0casIgmNtMivhOa1SB78JHl8q6j2CRrsr7pfchVnTk/Shhz7MGCac1smOHxlzIB/a7XVCabuOYMlzjsmRoOxn0mbOFH+6roE/lJLgnS6kLpCYCMpRLrOMuMrktjhYLn6MjYhPUvmczeT+A4fJvvz+AN2wAAAAAElFTkSuQmCC) center no-repeat;
+  }
+
