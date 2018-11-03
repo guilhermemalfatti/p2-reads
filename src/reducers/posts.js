@@ -3,7 +3,8 @@ import { Types } from '../actions/actionCreators'
 
 const INITIAL_STATE = {
   items: [],
-  originalList: []
+  originalList: [],
+  selectedPost: null
 };
 
 const addPost = (state = INITIAL_STATE, action) => {
@@ -73,11 +74,17 @@ const sortPost = (state = INITIAL_STATE, action) => {
   }
 }
 
-
 const updateList = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     items: action.posts
+  }
+}
+
+const getPost = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    selectedPost: action.post
   }
 }
 
@@ -87,7 +94,8 @@ const HANDLERS = {
   [Types.DOWN_VOTE]: downVote,
   [Types.UP_VOTE]: upVote,
   [Types.SORT_POST]: sortPost,
-  [Types.UPDATE_LIST]: updateList
+  [Types.UPDATE_LIST]: updateList,
+  [Types.GET_POST]: getPost
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

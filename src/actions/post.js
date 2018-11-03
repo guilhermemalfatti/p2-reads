@@ -17,6 +17,18 @@ export function postVote(postId, vote) {
             options).catch((err) => alert('There was an error, the data is inconsistent, refresh the page and try again' + err))
     }
 }
+export function getPost(postId) {
+    return (dispatch) => {
+        return axios.get(
+            API_ENDPOINT.READABLE_STARTER + '/posts/' + postId,
+            options)
+            .then((res)=>{
+                dispatch(ActionCreator.getPost(res.data));
+                dispatch(ActionCreator.dataReceived(res.data));
+            })
+            .catch((err) => alert('There was an error in getPost(), the data is inconsistent, refresh the page and try again' + err))
+    }
+}
 
 export function addPost() {
     return (dispatch) => {

@@ -11,14 +11,8 @@ class App extends Component {
     return (
       <div>
         <Header/>
-        <Route exact path={process.env.PUBLIC_URL + '/post'} render={() => (
-          <PostsPage/>
-        )}
-        />
-        <Route exact path={process.env.PUBLIC_URL + '/'} render={() => (
-          <Posts/>
-        )}
-        />
+        <Route exact path={process.env.PUBLIC_URL + '/:category/:post_id'} component={PostsPage}/>
+        <Route exact path={process.env.PUBLIC_URL + '/'} component={Posts}/>
 
       </div>
 

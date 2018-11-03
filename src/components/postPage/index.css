@@ -2,7 +2,12 @@
     position: relative;
     display: inline-block;
 }
+.option:hover ul {
+  visibility: visible;
+}
 .option ul {
+    visibility: hidden;
+    transition: all ease 0.8s;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -12,7 +17,6 @@
     background-color: white;
     font-weight:bold;
     position: absolute;
-
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -112,6 +116,7 @@
   .name {
     color: #3a3e47;
     font-weight: 500;
+    text-transform: uppercase;
   }
 
   .name:hover {

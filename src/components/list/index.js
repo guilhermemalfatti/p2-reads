@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
-import moment from 'moment'
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 let postDate = (timestamp) => {
     return moment(timestamp).format('YY/MM/DD HH:mm:ss');
@@ -18,9 +19,9 @@ export default function List(props) {
                     </div>
 
                     <div className="question-and-answer">
-                        <a href="#">
+                        <Link to={process.env.PUBLIC_URL + '/' + post.category + '/' + post.id} >
                             <h2>{post.title}</h2>
-                        </a>
+                        </Link>
 
                         <p className="author">{post.author} - {postDate(post.timestamp)}</p>
                         <p>{post.body}</p>

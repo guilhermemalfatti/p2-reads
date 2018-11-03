@@ -10,8 +10,7 @@ export default function receiveInitialData() {
                 dispatch(ActionCreator.initialData(res.data));
             })
             .catch((err) => {
-                console.error("error on getting the data " + err)
-                //dispatch(ActionCreator.initialData([]));
+                console.error("Error on getting the data " + err)
             })
     }
 }

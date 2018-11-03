@@ -6,12 +6,15 @@ export const { Types, Creators } = createActions({
   deletePost: ['postId'],
   upVote: ['postId'],
   downVote: ['postId'],
+  getPost: ['post'],
 
   addCommet: ['commet'],
   editCommet: ['commetId'],
   deleteCommmet: ['commetId'],
 
   initialData: ['posts'],
+  requestData: null,
+  dataReceived: null,
 
   receiveCategories: ['categories'],
 

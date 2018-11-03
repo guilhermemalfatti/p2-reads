@@ -75,7 +75,7 @@ class Posts extends Component {
 
     render() {
         const { sortByDesc } = this.state;
-        let { posts, isLoading, } = this.props;
+        let { posts, isLoading } = this.props;
 
         return (
             <div className="wrapper">
