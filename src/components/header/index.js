@@ -13,11 +13,11 @@ class Header extends Component {
     render() {
         let { categories } = this.props;
         return (
-            <div id="categories-list" class="carousel slide" data-ride="carousel">
+            <div id="categories-list" className="carousel slide" data-ride="carousel">
 
-                <div class="carousel-wrapper">
+                <div className="carousel-wrapper">
                     <h2>Categories</h2>
-                    <ol class="carousel-indicators">
+                    <ol className="carousel-indicators">
                         {categories && categories.map((cat)=>(
                         <span >{cat.name}</span>
                         ))}

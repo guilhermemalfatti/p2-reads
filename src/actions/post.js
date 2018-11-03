@@ -24,7 +24,7 @@ export function getPost(postId) {
             options)
             .then((res)=>{
                 dispatch(ActionCreator.getPost(res.data));
-                dispatch(ActionCreator.dataReceived(res.data));
+                //dispatch(ActionCreator.dataReceived(res.data));
             })
             .catch((err) => alert('There was an error in getPost(), the data is inconsistent, refresh the page and try again' + err))
     }

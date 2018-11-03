@@ -93,5 +93,5 @@ class PostsPage extends Component {
 }
 export default connect((state) => ({
     isLoading: state.loading.isLoading,
-    post: state.posts.selectedPost
+    post: state.posts.selectedPost || {}
 }))(PostsPage)
