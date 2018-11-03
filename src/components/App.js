@@ -21,9 +21,13 @@ class App extends Component {
           <i class="fa fa-home"></i>
         </Link>
 
-        <Header />
-        <Route exact path={process.env.PUBLIC_URL + '/:category/:post_id'} component={PostsPage} />
+        <Route path={process.env.PUBLIC_URL + '/:category'} component={Header} />
+        <Route exact path={process.env.PUBLIC_URL + '/'} component={Header} />
+
+        <Route path={process.env.PUBLIC_URL + '/:category/:post_id'} component={PostsPage} />
+
         <Route exact path={process.env.PUBLIC_URL + '/'} component={Posts} />
+        <Route path={process.env.PUBLIC_URL + '/:category'} component={Posts} />
 
       </div>
 
