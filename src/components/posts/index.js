@@ -6,6 +6,7 @@ import receiveInitialData from '../../actions/shared';
 import { postVote } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
+import CreatePostBtn from '../createPost/index'
 
 class Posts extends Component {
     state = {
@@ -81,7 +82,7 @@ class Posts extends Component {
                             <input value={this.state.searchValue} type="text" onChange={this.filterList} placeholder="Have a question? Search for post by keywords" />
                         </div>
                         <button onClick={this.resetFilter}>Reset</button>
-                        <button >ADD</button>
+                        <CreatePostBtn/>
                         <div className="dropdown">
                             <button className="dropbtn">{sortByDesc}<span className="caret"></span></button>
                             <div className="dropdown-content">
