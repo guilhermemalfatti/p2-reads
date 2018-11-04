@@ -17,6 +17,7 @@ export const { Types, Creators } = createActions({
   dataReceived: null,
 
   receiveCategories: ['categories'],
+  selectCategory: ['category'],
 
   sortPost: ['term'],
 

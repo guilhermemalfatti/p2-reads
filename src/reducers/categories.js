@@ -13,8 +13,18 @@ const receivecategories = (state = INITIAL_STATE, action) => {
     }
 }
 
+
+const selectCategory = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        selectedCategory: action.category
+    }
+}
+
 const HANDLERS = {
-    [Types.RECEIVE_CATEGORIES]: receivecategories
+    [Types.RECEIVE_CATEGORIES]: receivecategories,
+    [Types.SELECT_CATEGORY]: selectCategory
+
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

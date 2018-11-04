@@ -8,8 +8,11 @@ const INITIAL_STATE = {
 };
 
 const addPost = (state = INITIAL_STATE, action) => {
-  //TODO: adjust it, *originalList*
-  return [...state.posts, action.post]
+  return {
+    ...state,
+    items: state.items.concat(action.post),
+    originalList: state.originalList.concat(action.post)
+  }
 }
 
 const initialdata = (state = INITIAL_STATE, action) => {

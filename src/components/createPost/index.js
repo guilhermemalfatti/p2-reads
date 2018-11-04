@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './index.css';
 import Modal from 'react-bootstrap/lib/Modal';
+import serializeForm from 'form-serialize';
+import { connect } from 'react-redux';
+import { addPost } from '../../actions/post';
+import {withRouter } from 'react-router-dom'
 
 class CreatePostBtn extends Component {
     constructor(props, context) {
@@ -11,7 +14,8 @@ class CreatePostBtn extends Component {
         this.handleHide = this.handleHide.bind(this);
 
         this.state = {
-            show: false
+            show: false,
+            showAlert: false
         };
     }
 
@@ -23,8 +27,19 @@ class CreatePostBtn extends Component {
         this.setState({ show: false });
     }
 
+    handleSubmit = (e) => {
+        const { dispatch, history } = this.props;
+        e.preventDefault()
+        const values = serializeForm(e.target, { hash: true })
+
+        dispatch(addPost(values, history));
+    }
+
     render() {
+        let { categories } = this.props;
         return (
+
+
             <React.Fragment>
                 <button onClick={this.handleShow}>ADD</button>
                 <Modal
@@ -36,23 +51,27 @@ class CreatePostBtn extends Component {
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-lg">
                             New post
-                </Modal.Title>
+                    </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div class="form-group">
+                        <form onSubmit={this.handleSubmit} >
                             <div className='create-contact-details'>
                                 <input type='text' name='title' placeholder='Title' />
                                 <textarea type='text' name='body' placeholder='Body' />
                                 <input className="author" type='text' name='author' placeholder='Author' />
-                                <select>
+                                <select name="category">
                                     <option>Category</option>
-                                    <option>d</option>
-                                </select>
-                                <button>Add Post</button>&nbsp;
-                            <button>Cancel</button>
-                            </div>
+                                    {categories && categories.map((cat) => (
+                                        <option value={cat.name}>{cat.name}</option>
+                                    ))}
 
-                        </div>
+                                </select>
+                                <button type="submit">Add Post</button>&nbsp;
+                            <button type="reset" onClick={this.handleHide}>Cancel</button>
+                            </div>
+                        </form>
+
+
                     </Modal.Body>
                 </Modal>
             </React.Fragment>
@@ -60,4 +79,6 @@ class CreatePostBtn extends Component {
     }
 }
 
-export default CreatePostBtn;
+export default withRouter(connect((state) => ({
+    categories: state.categories.items
+}))(CreatePostBtn))

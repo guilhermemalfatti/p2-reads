@@ -253,39 +253,6 @@
     border-top: 5px solid #ffaa3b;
   }
 
-  form {
-    text-align: right;
-    position: relative;
-    float: right;
-    top: 18px;
-    display: inline-block;
-    border-radius: 50px;
-    width: 42px;
-    height: 42px;
-    border: 1px solid #c7c8cd;
-    transition: width .5s;
-  }
-
-  form input {
-    display: inline-block;
-    border: none;
-    background: transparent;
-  }
-
-  form input[type=text] {
-    display: none;
-    border: 1px solid #c7c8cd;
-  }
-
-  form input[type=submit] {
-    outline: none;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABuUlEQVQ4T6WTS0tCQRTH59xrapHWovoG1SLITbVpVbTMNtUXSFTapfmiB0T0QC2uCRIp2geINlqroDatqkUUQVSrltEmDTK9d6YzV41riWANDMN5/e7/nJkLRLO2tvY6mAhuRmAc3T08BITdUwJpUaFRj8f5qs0vxcsrFIlPEgZJNNt+JpVslsXsGd+c41AbVwHl4oMyMMOoIH0Y85c81pw3DgJQNxZzVSiOTWshsBFNdeoU+QnFmJG25HXZ12spCEuJRUbIGlcCstLt9c6+qC0EpcQqFi4j+8jntltryy95Q1IijYcV57LpdTkWVEBYil+jLgvKHvXP287qAYLbyREQ6Cnm3Ppc9n4VgNQ8ngZWEMx+vy1XFxBMmkBPs5hTQIChYcBKLNbaUtDnsOV3nJXpPy3coAJL9RAJyaBzovEhhne7mE58/PM1/n5IkGYUIgJtuuAxKhSHcPIufn1ldXf0kw4HAs43tYWKZHwPU2ik0FaHU2PxG3rG3Yf7CiFjHPIN4AWan4l/rZdfFwPyABSOBarsiKJeLhL5BP0DFUgVoN4AKzFJ2m+vQIDAecMADuIQmSgZRpj4BYX20byiRXQ1AAAAAElFTkSuQmCC) center no-repeat;
-  }
-
   #team {
     text-align: center;
   }

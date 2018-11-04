@@ -22,7 +22,9 @@ const loadingOn = (state = INITIAL_STATE, action) => {
 const HANDLERS = {
     [Types.INITIAL_DATA]: loadingOff,
     [Types.REQUEST_DATA]: loadingOn,
-    [Types.GET_POST]: loadingOff
+    [Types.GET_POST]: loadingOff,
+    [Types.DATA_RECEIVED]: loadingOff
+
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

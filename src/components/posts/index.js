@@ -6,12 +6,13 @@ import receiveInitialData from '../../actions/shared';
 import { postVote } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
-import CreatePostBtn from '../createPost/index'
+import CreatePostBtn from '../createPost/index';
 
 class Posts extends Component {
     state = {
         sortByDesc: 'Sort by',
-        searchValue: ''
+        searchValue: '',
+
     }
 
     selectFilter = (filter) => {

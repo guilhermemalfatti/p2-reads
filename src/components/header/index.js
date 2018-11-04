@@ -29,6 +29,7 @@ class Header extends Component {
             filteredPosts = originalPosts.filter((item)=> item.category === category);
             dispatch(ActionCreator.updateList(filteredPosts));
         }
+        dispatch(ActionCreator.selectCategory(category));
     }
 
     render() {
