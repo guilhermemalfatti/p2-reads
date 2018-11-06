@@ -697,3 +697,54 @@
   #dropdown a:hover {
     color: #4f545e;
   }
+
+  #post .votes {
+    position: absolute;
+    top: 210px;
+  }
+
+#post .votes .upvote {
+  position: relative;
+  padding: 1em;
+  cursor: pointer;
+}
+#post .votes .upvote:after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid rgba(0, 0, 0, 0.75);
+}
+#post .votes .number-of-votes {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.25em;
+}
+#post .votes .downvote {
+  position: relative;
+  padding: 1em;
+  cursor: pointer;
+}
+#post .votes .downvote:after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid rgba(0, 0, 0, 0.75);
+}

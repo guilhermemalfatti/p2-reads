@@ -1,0 +1,9 @@
+:local(.red) {
+    border-top: 10px solid #ea0000;
+  }
+  :local(.yellow) {
+    border-top: 10px solid #ffba00;
+  }
+  :local(.green) {
+    border-top: 10px solid #7ad03a;
+  }

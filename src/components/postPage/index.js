@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './index.css';
-import { getPost } from '../../actions/post';
+import style from './voteStyle.css';
+import { selectPost } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import Loading from '../loading/index';
 import moment from 'moment';
+import { postVote } from '../../actions/post';
 
 class PostsPage extends Component {
 
@@ -13,7 +15,13 @@ class PostsPage extends Component {
         const { dispatch } = this.props
 
         dispatch(ActionCreator.requestData());
-        dispatch(getPost(post_id));
+        dispatch(selectPost(post_id));
+    }
+
+    vote = (postId, vote) => {
+        let { dispatch } = this.props;
+        dispatch(postVote(postId, vote));
+        dispatch(ActionCreator.voteSelectedPost(vote));
     }
 
     postDate = (timestamp) => {
@@ -28,7 +36,12 @@ class PostsPage extends Component {
                 :
                 <div className="container">
                     <div>
-                        <div id="post">
+                        <div id="post" className={post.voteScore > 2 ? style.green : post.voteScore >= 0 && post.voteScore <= 2 ? style.yellow : style.red}>
+                            <div className="votes">
+                                <div className="upvote" onClick={() => this.vote(post.id, 'upVote')}></div>
+                                <div className="number-of-votes">{post.voteScore}</div>
+                                <div className="downvote" onClick={() => this.vote(post.id, 'downVote')}></div>
+                            </div>
                             <header>
                                 <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png"} alt="" />
                                 <p><a className="name">{post.author}</a> wrote a post to the category <a >{post.category}</a>.<span>{this.postDate(post.timestamp)}</span></p>

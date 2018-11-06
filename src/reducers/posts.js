@@ -84,14 +84,22 @@ const updateList = (state = INITIAL_STATE, action) => {
   }
 }
 
-const getPost = (state = INITIAL_STATE, action) => {
+const selectPost = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     selectedPost: action.post
   }
 }
 
-
+const voteSelectedPost = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    selectedPost : {
+      ...state.selectedPost,
+      voteScore: action.vote == 'upVote' ? state.selectedPost.voteScore + 1 : state.selectedPost.voteScore - 1
+    }
+  }
+}
 
 const HANDLERS = {
   [Types.ADD_POST]: addPost,
@@ -100,8 +108,8 @@ const HANDLERS = {
   [Types.UP_VOTE]: upVote,
   [Types.SORT_POST]: sortPost,
   [Types.UPDATE_LIST]: updateList,
-  [Types.GET_POST]: getPost,
-
+  [Types.SELECT_POST]: selectPost,
+  [Types.VOTE_SELECTED_POST]: voteSelectedPost
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)
