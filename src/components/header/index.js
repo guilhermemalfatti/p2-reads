@@ -51,11 +51,11 @@ class Header extends Component {
                         {categories && categories.map((cat) => (
 
                             category === cat.path ?
-                                <Link key={cat.path} to={cat.path} >
+                                <Link key={cat.path} to={'/'.concat(cat.path)} >
                                     <span className="active" onClick={()=>{this.filter(cat.path)}}> {cat.name} </span>
                                 </Link>
                                 :
-                                <Link key={cat.path} to={cat.path} >
+                                <Link key={cat.path} to={'/'.concat(cat.path)} >
                                     <span onClick={()=>{this.filter(cat.path)}}> {cat.name} </span>
                                 </Link>
 
