@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
 import style from './voteStyle.css';
-import { selectPost } from '../../actions/post';
+import { selectPost, deletePost } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import Loading from '../loading/index';
@@ -15,7 +15,7 @@ class PostsPage extends Component {
         const { dispatch } = this.props
 
         dispatch(ActionCreator.requestData());
-        dispatch(selectPost(post_id));
+        dispatch(ActionCreator.selectPost(post_id));
     }
 
     vote = (postId, vote) => {
@@ -28,10 +28,34 @@ class PostsPage extends Component {
         return moment(timestamp).format('YY/MM/DD HH:mm:ss');
     }
 
+    deletePost = (id) => {
+        const { dispatch } = this.props
+
+        //api call
+        dispatch(deletePost(id));
+    }
+
+    editPost = () => {
+
+    }
+
     render() {
         let { isLoading, post } = this.props;
+
+        if (!post.id && !isLoading) {
+            return (
+                <div className="not-found">
+                    <h1>404</h1>
+                    <h2>Item Not Found</h2>
+
+                    <p>Sorry, I couldn't find the post you were looking for.</p>
+
+                </div>
+            )
+        }
+
         return (
-            isLoading == true ?
+            isLoading === true ?
                 <Loading />
                 :
                 <div className="container">
@@ -44,11 +68,16 @@ class PostsPage extends Component {
                             </div>
                             <header>
                                 <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png"} alt="" />
-                                <p><a className="name">{post.author}</a> wrote a post to the category <a >{post.category}</a>.<span>{this.postDate(post.timestamp)}</span></p>
+                                <p>
+                                    <a href="#" className="name">{post.author}</a>
+                                    wrote a post to the category
+                                    <a href="#">{post.category}</a>.
+                                    <span>{this.postDate(post.timestamp)}</span>
+                                </p>
                                 <div className="option">
                                     <ul>
-                                        <li><a href="#edit">Edit</a></li>
-                                        <li><a href="#delete">Delete</a></li>
+                                        <li key="edit"><a href="#edit" >Edit</a></li>
+                                        <li key="delete" onClick={() => this.deletePost(post.id)}><a href="#delete" >Delete</a></li>
                                     </ul>
                                 </div>
                             </header>
@@ -61,11 +90,11 @@ class PostsPage extends Component {
                             </div>
 
                             <div className="hide-comments">
-                                <input type="checkbox" value="" id="hide-button" name="check" checked />
-                                <label for="hide-button" className="button">Hide Comments</label>
+                                <input type="checkbox" value="" id="hide-button" name="check" />
+                                <label className="button">Hide Comments</label>
 
-                                <input type="checkbox" value="" id="new-comment" name="check" checked />
-                                <label for="new-comment" className="button">New Comment</label>
+                                <input type="checkbox" value="" id="new-comment" name="check" />
+                                <label className="button">New Comment</label>
                             </div>
 
                             <div className="comments">
@@ -77,12 +106,10 @@ class PostsPage extends Component {
                                             <div className="content">
                                                 <p>This picture is absolutely amazing! You are such a good photographer :)</p>
                                             </div>
-                                            <a href="" className="edit">edit</a>
-                                            <a href="" className="delete">delete</a>
+                                            <a href="#" className="edit">edit</a>
+                                            <a href="#" className="delete">delete</a>
                                         </div>
                                     </li>
-
-
 
                                     <li key="2">
                                         <div className="user-comment">
@@ -91,8 +118,8 @@ class PostsPage extends Component {
                                             <div className="content">
                                                 <p>Wow!!! Cool shot, Daniel! You should post more often =)</p>
                                             </div>
-                                            <a href="" className="edit">Edit</a>
-                                            <a href="" className="delete">Delete</a>
+                                            <a href="#" className="edit">Edit</a>
+                                            <a href="#" className="delete">Delete</a>
                                         </div>
                                     </li>
                                 </ul>

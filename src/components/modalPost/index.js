@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { addPost } from '../../actions/post';
 import { withRouter } from 'react-router-dom'
 
-class CreatePostBtn extends Component {
+class ModalPost extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -49,7 +49,7 @@ class CreatePostBtn extends Component {
    * @param {object} event - The event
    */
   handleCategoryChange(event) {
-    this.setState({ actegory: event.target.value });
+    this.setState({ category: event.target.value });
   }
 
   handleShow() {
@@ -85,7 +85,7 @@ class CreatePostBtn extends Component {
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               New post
-                    </Modal.Title>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.handleSubmit} >
@@ -115,4 +115,4 @@ class CreatePostBtn extends Component {
 
 export default withRouter(connect((state) => ({
   categories: state.categories.items
-}))(CreatePostBtn))
+}))(ModalPost))

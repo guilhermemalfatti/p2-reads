@@ -6,7 +6,7 @@ import receiveInitialData from '../../actions/shared';
 import { postVote } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
-import CreatePostBtn from '../createPost/index';
+import ModalPost from '../modalPost/index';
 
 class Posts extends Component {
     state = {
@@ -25,14 +25,6 @@ class Posts extends Component {
     voteItem = (postId, vote) => {
         let { dispatch } = this.props;
         dispatch(postVote(postId, vote));
-    }
-
-    deleteitem = () => {
-
-    }
-
-    editItem = () => {
-
     }
 
     defineColor = (votes) => {
@@ -83,7 +75,7 @@ class Posts extends Component {
                             <input value={this.state.searchValue} type="text" onChange={this.filterList} placeholder="Have a question? Search for post by keywords" />
                         </div>
                         <button onClick={this.resetFilter}>Reset</button>
-                        <CreatePostBtn/>
+                        <ModalPost/>
                         <div className="dropdown">
                             <button className="dropbtn">{sortByDesc}<span className="caret"></span></button>
                             <div className="dropdown-content">

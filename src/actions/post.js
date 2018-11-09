@@ -18,17 +18,6 @@ export function postVote(postId, vote) {
             options).catch((err) => alert('There was an error, the data is inconsistent, refresh the page and try again' + err))
     }
 }
-export function selectPost(postId) {
-    return (dispatch) => {
-        return axios.get(
-            API_ENDPOINT.READABLE_STARTER + '/posts/' + postId,
-            options)
-            .then((res) => {
-                dispatch(ActionCreator.selectPost(res.data));
-            })
-            .catch((err) => alert('There was an error in selectPost(), the data is inconsistent, refresh the page and try again' + err))
-    }
-}
 
 export function addPost(values,  history) {
     values['id'] = uuidv4();
@@ -58,13 +47,13 @@ export function editPost() {
 }
 
 
-export function deletePost() {
+export function deletePost(id) {
     return (dispatch) => {
-        /* return axios({
-            method: "get",
-            url: "https://dog.ceo/api/breeds/image/random"
-        }).then((res) => {
-            dispatch(ActionCreator.addPost({id:22, body:res.data.message}));
-        }).catch(() => alert('There was an error. Try again.')) */
+        //remove from state
+        dispatch(ActionCreator.deletePost(id));
+        axios.delete(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, options)
+            .catch((err) => {
+                alert('There was an error on delete a post, refresh and try again.' + err)
+            })
     }
 }

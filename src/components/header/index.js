@@ -12,7 +12,7 @@ class Header extends Component {
         const { dispatch, originalPosts } = this.props
         const { category } = this.props.match.params;
 
-        if(originalPosts.length == 0){
+        if(originalPosts.length === 0){
             dispatch(receiveInitialData(category));
         }
 
@@ -41,7 +41,7 @@ class Header extends Component {
                 <div className="carousel-wrapper">
                     <h2>Categories</h2>
                     <ol className="carousel-indicators">
-                        {category == undefined ?
+                        {category === undefined ?
                             <span className="active"> All </span> :
 
                             <Link to="/" >
@@ -51,11 +51,11 @@ class Header extends Component {
                         {categories && categories.map((cat) => (
 
                             category === cat.path ?
-                                <Link to={cat.path} >
+                                <Link key={cat.path} to={cat.path} >
                                     <span className="active" onClick={()=>{this.filter(cat.path)}}> {cat.name} </span>
                                 </Link>
                                 :
-                                <Link to={cat.path} >
+                                <Link key={cat.path} to={cat.path} >
                                     <span onClick={()=>{this.filter(cat.path)}}> {cat.name} </span>
                                 </Link>
 

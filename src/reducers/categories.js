@@ -2,7 +2,7 @@ import { createReducer } from 'reduxsauce'
 import { Types } from '../actions/actionCreators'
 
 const INITIAL_STATE = {
-    categories: [],
+    items: [],
     selectedCategory: 'all'
 };
 

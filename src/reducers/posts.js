@@ -18,7 +18,7 @@ const addPost = (state = INITIAL_STATE, action) => {
 const initialdata = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    items: action.filter ? action.posts.filter((item)=>item.category === action.filter) : action.posts,
+    items: action.filter ? action.posts.filter((item) => item.category === action.filter) : action.posts,
     originalList: action.posts
   }
 }
@@ -27,7 +27,7 @@ const downVote = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     items: state.items.map((item) => {
-      if (item.id == action.postId) {
+      if (item.id === action.postId) {
         item.voteScore -= 1;
       }
       return item;
@@ -39,7 +39,7 @@ const upVote = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     items: state.items.map((item) => {
-      if (item.id == action.postId) {
+      if (item.id === action.postId) {
         item.voteScore += 1;
       }
       return item;
@@ -87,17 +87,28 @@ const updateList = (state = INITIAL_STATE, action) => {
 const selectPost = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    selectedPost: action.post
+    selectedPost: state.items.filter((item) => {
+      return item.id === action.postId
+    })[0]
   }
 }
 
 const voteSelectedPost = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    selectedPost : {
+    selectedPost: {
       ...state.selectedPost,
-      voteScore: action.vote == 'upVote' ? state.selectedPost.voteScore + 1 : state.selectedPost.voteScore - 1
+      voteScore: action.vote === 'upVote' ? state.selectedPost.voteScore + 1 : state.selectedPost.voteScore - 1
     }
+  }
+}
+
+const deletePost = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    items: state.items.filter((item) => item.id !== action.postId),
+    originalList: state.originalList.filter((item) => item.id !== action.postId),
+    selectedPost: null
   }
 }
 
@@ -109,7 +120,8 @@ const HANDLERS = {
   [Types.SORT_POST]: sortPost,
   [Types.UPDATE_LIST]: updateList,
   [Types.SELECT_POST]: selectPost,
-  [Types.VOTE_SELECTED_POST]: voteSelectedPost
+  [Types.VOTE_SELECTED_POST]: voteSelectedPost,
+  [Types.DELETE_POST]: deletePost
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

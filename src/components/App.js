@@ -12,13 +12,13 @@ class App extends Component {
       <div>
 
         <Link to="//github.com/guilhermemalfatti" className="float-github">
-          <i class="fa fa-github"></i>
+          <i className="fa fa-github"></i>
         </Link>
         <Link to="//www.linkedin.com/in/guilherme-malfatti-b2683966" className="float-linkedin">
-          <i class="fa fa-linkedin"></i>
+          <i className="fa fa-linkedin"></i>
         </Link>
         <Link to={process.env.PUBLIC_URL + '/'} className="float-home">
-          <i class="fa fa-home"></i>
+          <i className="fa fa-home"></i>
         </Link>
 
         <Route path={process.env.PUBLIC_URL + '/:category'} component={Header} />
