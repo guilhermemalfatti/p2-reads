@@ -7,8 +7,12 @@ import ActionCreator from '../../actions/actionCreators';
 import Loading from '../loading/index';
 import moment from 'moment';
 import { postVote } from '../../actions/post';
+import ModalPost from '../modalPost/index';
 
 class PostsPage extends Component {
+    state = {
+        editing: false
+    };
 
     componentDidMount() {
         const { post_id } = this.props.match.params
@@ -36,11 +40,27 @@ class PostsPage extends Component {
     }
 
     editPost = () => {
+        this.setState({
+            editing: true
+        });
 
+    }
+
+    cancelEdit = () => {
+        this.setState({
+            editing: false
+        });
     }
 
     render() {
         let { isLoading, post } = this.props;
+
+        if (this.state.editing) {
+
+            return (
+                <ModalPost post={post} showModal={true} editing={true} cancelEdit={this.cancelEdit}/>
+            )
+        }
 
         if (!post.id && !isLoading) {
             return (
@@ -69,14 +89,14 @@ class PostsPage extends Component {
                             <header>
                                 <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png"} alt="" />
                                 <p>
-                                    <a href="#" className="name">{post.author}</a>
-                                    wrote a post to the category
-                                    <a href="#">{post.category}</a>.
+                                    <a href="#" className="name">{post.author }</a>
+                                    &nbsp;wrote a post to the category
+                                    &nbsp;<a href="#">{post.category}</a>.
                                     <span>{this.postDate(post.timestamp)}</span>
                                 </p>
                                 <div className="option">
                                     <ul>
-                                        <li key="edit"><a href="#edit" >Edit</a></li>
+                                        <li key="edit"  onClick={()=>{this.editPost()}}><a href="#edit">Edit</a></li>
                                         <li key="delete" onClick={() => this.deletePost(post.id)}><a href="#delete" >Delete</a></li>
                                     </ul>
                                 </div>

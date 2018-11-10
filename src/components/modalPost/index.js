@@ -3,7 +3,7 @@ import './index.css';
 import Modal from 'react-bootstrap/lib/Modal';
 import serializeForm from 'form-serialize';
 import { connect } from 'react-redux';
-import { addPost } from '../../actions/post';
+import { addPost, editPost } from '../../actions/post';
 import { withRouter } from 'react-router-dom'
 
 class ModalPost extends Component {
@@ -16,12 +16,20 @@ class ModalPost extends Component {
     this.state = {
       show: false,
       showAlert: false,
-      title: '',
-      body: '',
-      author: '',
-      category: ''
+      title: props.post && props.post.title || '',
+      body: props.post && props.post.body || '',
+      author: props.post && props.post.author || '',
+      category: props.post && props.post.category || ''
     };
   }
+
+  componentDidMount() {
+    var { showModal } = this.props;
+    if (showModal) {
+      this.handleShow();
+    }
+  }
+
   /**
    * @description Handle the Input component value change
    * @param {object} event - The event
@@ -57,25 +65,36 @@ class ModalPost extends Component {
   }
 
   handleHide() {
+    let { cancelEdit } = this.props;
     this.setState({ show: false });
+    if (cancelEdit) {
+      cancelEdit();
+    }
   }
 
   handleSubmit = (e) => {
-    const { dispatch, history } = this.props;
+    const { dispatch, history, editing, selectedPost } = this.props;
     e.preventDefault()
     const values = serializeForm(e.target, { hash: true })
 
-    dispatch(addPost(values, history));
+    if (editing) {
+      dispatch(editPost(values, selectedPost.id, history));
+      this.handleHide();
+    } else {
+      dispatch(addPost(values, history));
+    }
+
   }
 
   render() {
-    let { categories } = this.props;
+    let { categories, editing } = this.props;
     const { title, body, author, category } = this.state
+
     return (
 
 
       <React.Fragment>
-        <button onClick={this.handleShow}>ADD</button>
+        {editing != true && <button onClick={this.handleShow}>ADD</button>}
         <Modal
           {...this.props}
           show={this.state.show}
@@ -84,23 +103,23 @@ class ModalPost extends Component {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              New post
+              {editing == true ? 'Edit post' : 'New post'}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.handleSubmit} >
               <div className='create-contact-details'>
-                <input type='text' name='title' placeholder='Title' value={title} onChange={(event)=>this.handleTitleChange(event)}/>
-                <textarea type='text' name='body' placeholder='Body' value={body} onChange={(event)=>this.handleBodyChange(event)}/>
-                <input className="author" type='text' name='author' placeholder='Author' value={author} onChange={(event)=>this.handleAuthorChange(event)}/>
-                <select name="category" value={category} onChange={(event)=>this.handleCategoryChange(event)}>
+                <input type='text' name='title' placeholder='Title' value={title} onChange={(event) => this.handleTitleChange(event)} />
+                <textarea type='text' name='body' placeholder='Body' value={body} onChange={(event) => this.handleBodyChange(event)} />
+                <input className="author" disabled={editing} type='text' name='author' placeholder='Author' value={author} onChange={(event) => this.handleAuthorChange(event)} />
+                <select disabled={editing} name="category" value={category} onChange={(event) => this.handleCategoryChange(event)}>
                   <option>Category</option>
                   {categories && categories.map((cat) => (
                     <option value={cat.name}>{cat.name}</option>
                   ))}
 
                 </select>
-                <button type="submit">Add Post</button>&nbsp;
+                <button type="submit">Submit Post</button>&nbsp;
                             <button type="reset" onClick={this.handleHide}>Cancel</button>
               </div>
             </form>
@@ -114,5 +133,6 @@ class ModalPost extends Component {
 }
 
 export default withRouter(connect((state) => ({
-  categories: state.categories.items
+  categories: state.categories.items,
+  selectedPost: state.posts.selectedPost || {}
 }))(ModalPost))

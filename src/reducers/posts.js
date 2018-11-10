@@ -112,6 +112,31 @@ const deletePost = (state = INITIAL_STATE, action) => {
   }
 }
 
+const editPost = (state = INITIAL_STATE, action) => {
+  return {
+    ...state,
+    items: state.items.map((item) => {
+      if (item.id === action.id) {
+        item.title = action.values.title;
+        item.body = action.values.body;
+      }
+      return item;
+    }),
+    originalList: state.originalList.map((item) => {
+      if (item.id === action.id) {
+        item.title = action.values.title;
+        item.body = action.values.body;
+      }
+      return item;
+    }),
+    selectedPost: {
+      ...state.selectedPost,
+      title: action.values.title,
+      body: action.values.body
+    }
+  }
+}
+
 const HANDLERS = {
   [Types.ADD_POST]: addPost,
   [Types.INITIAL_DATA]: initialdata,
@@ -121,7 +146,8 @@ const HANDLERS = {
   [Types.UPDATE_LIST]: updateList,
   [Types.SELECT_POST]: selectPost,
   [Types.VOTE_SELECTED_POST]: voteSelectedPost,
-  [Types.DELETE_POST]: deletePost
+  [Types.DELETE_POST]: deletePost,
+  [Types.EDIT_POST]: editPost
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)
