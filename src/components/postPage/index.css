@@ -411,6 +411,13 @@
     position: relative;
   }
 
+  #post header h2 {
+
+    position: absolute;
+    top: -30px;
+    left: 80px;
+  }
+
   #post > header img {
     border-radius: 50%;
     width: 60px;

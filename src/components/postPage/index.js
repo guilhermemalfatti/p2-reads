@@ -87,6 +87,7 @@ class PostsPage extends Component {
                                 <div className="downvote" onClick={() => this.vote(post.id, 'downVote')}></div>
                             </div>
                             <header>
+                            <h2>{post.title}</h2>
                                 <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png"} alt="" />
                                 <p>
                                     <a href="#" className="name">{post.author }</a>
