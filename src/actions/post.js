@@ -35,23 +35,36 @@ export function addPost(values, history) {
             }).catch((err) => alert('There was an error on create a post, the data is inconsistent, refresh and try again.' + err))
     }
 }
+
 export function editPost(values, id, history) {
 
     return (dispatch) => {
         dispatch(ActionCreator.editPost(values, id));
         axios.put(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, values, options)
-        .catch((err) => {
-            alert('There was an error on edit a post, the data is inconsistent, refresh and try again. ' + err)
-        });
+            .catch((err) => {
+                alert('There was an error on edit a post, the data is inconsistent, refresh and try again. ' + err)
+            });
     }
 }
-
 
 export function deletePost(id) {
     return (dispatch) => {
         //remove from state
         dispatch(ActionCreator.deletePost(id));
         axios.delete(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, options)
+            .catch((err) => {
+                alert('There was an error on delete a post, the data is inconsistent, refresh and try again.' + err)
+            });
+    }
+}
+
+export function selectPost(id) {
+    return (dispatch) => {
+        dispatch(ActionCreator.requestData());
+        axios.get(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, options)
+            .then((res) => {
+                dispatch(ActionCreator.selectPost(res.data));
+            })
             .catch((err) => {
                 alert('There was an error on delete a post, the data is inconsistent, refresh and try again.' + err)
             });

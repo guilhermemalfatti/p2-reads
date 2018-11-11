@@ -12,6 +12,7 @@ class Header extends Component {
         const { dispatch, originalPosts } = this.props
         const { category } = this.props.match.params;
 
+        //in order to request initial data, only in the first time.
         if(originalPosts.length === 0){
             dispatch(receiveInitialData(category));
         }

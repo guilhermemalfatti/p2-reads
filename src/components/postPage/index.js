@@ -18,8 +18,8 @@ class PostsPage extends Component {
         const { post_id } = this.props.match.params
         const { dispatch } = this.props
 
-        dispatch(ActionCreator.requestData());
-        dispatch(ActionCreator.selectPost(post_id));
+        //TODO: not working, since requestData is async, there is no data to select in the store
+        dispatch(selectPost(post_id));
     }
 
     vote = (postId, vote) => {
@@ -58,7 +58,7 @@ class PostsPage extends Component {
         if (this.state.editing) {
 
             return (
-                <ModalPost post={post} showModal={true} editing={true} cancelEdit={this.cancelEdit}/>
+                <ModalPost post={post} showModal={true} editing={true} cancelEdit={this.cancelEdit} />
             )
         }
 
@@ -87,17 +87,17 @@ class PostsPage extends Component {
                                 <div className="downvote" onClick={() => this.vote(post.id, 'downVote')}></div>
                             </div>
                             <header>
-                            <h2>{post.title}</h2>
+                                <h2>{post.title}</h2>
                                 <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-64.png"} alt="" />
                                 <p>
-                                    <a href="#" className="name">{post.author }</a>
+                                    <a href="#" className="name">{post.author}</a>
                                     &nbsp;wrote a post to the category
                                     &nbsp;<a href="#">{post.category}</a>.
                                     <span>{this.postDate(post.timestamp)}</span>
                                 </p>
                                 <div className="option">
                                     <ul>
-                                        <li key="edit"  onClick={()=>{this.editPost()}}><a href="#edit">Edit</a></li>
+                                        <li key="edit" onClick={() => { this.editPost() }}><a href="#edit">Edit</a></li>
                                         <li key="delete" onClick={() => this.deletePost(post.id)}><a href="#delete" >Delete</a></li>
                                     </ul>
                                 </div>

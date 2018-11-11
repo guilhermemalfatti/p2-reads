@@ -7,7 +7,7 @@ export const { Types, Creators } = createActions({
   upVote: ['postId'],
   downVote: ['postId'],
   voteSelectedPost: ['vote'],
-  selectPost: ['postId'],
+  selectPost: ['post'],
 
   addComment: ['comment'],
   editComment: ['comment'],

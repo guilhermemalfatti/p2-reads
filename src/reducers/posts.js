@@ -87,9 +87,7 @@ const updateList = (state = INITIAL_STATE, action) => {
 const selectPost = (state = INITIAL_STATE, action) => {
   return {
     ...state,
-    selectedPost: state.items.filter((item) => {
-      return item.id === action.postId
-    })[0]
+    selectedPost: action.post
   }
 }
 
