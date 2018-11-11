@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './index.css';
 import Loading from '../loading/index';
 import List from '../list/index';
-import receiveInitialData from '../../actions/shared';
 import { postVote } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import ModalPost from '../modalPost/index';
+import { defineColor } from '../../util/index';
 
 class Posts extends Component {
     state = {
@@ -27,16 +27,6 @@ class Posts extends Component {
         dispatch(postVote(postId, vote));
     }
 
-    defineColor = (votes) => {
-        if (votes > 2) {
-            return 'green';
-        } else if (votes >= 0 && votes <= 2) {
-            return 'yellow';
-        } else {
-            return 'red';
-        }
-    }
-
     filterList = (event) => {
         let { dispatch } = this.props;
         var updatedList = this.props.originalPosts;
@@ -53,7 +43,7 @@ class Posts extends Component {
         dispatch(ActionCreator.updateList(updatedList));
     }
 
-    resetFilter = () =>{
+    resetFilter = () => {
         let { dispatch } = this.props;
         this.setState({
             searchValue: ''
@@ -75,7 +65,7 @@ class Posts extends Component {
                             <input value={this.state.searchValue} type="text" onChange={this.filterList} placeholder="Have a question? Search for post by keywords" />
                         </div>
                         <button onClick={this.resetFilter}>Reset</button>
-                        <ModalPost/>
+                        <ModalPost />
                         <div className="dropdown">
                             <button className="dropbtn">{sortByDesc}<span className="caret"></span></button>
                             <div className="dropdown-content">
@@ -89,10 +79,9 @@ class Posts extends Component {
                         <Loading /> :
                         <List
                             items={posts}
-                            edit={this.editItem}
-                            delete={this.deleteitem}
+                            type="post"
                             vote={this.voteItem}
-                            color={this.defineColor}
+                            color={defineColor}
                         />
                     }
 

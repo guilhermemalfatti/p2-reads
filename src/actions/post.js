@@ -15,7 +15,7 @@ export function postVote(postId, vote) {
         return axios.post(
             API_ENDPOINT.READABLE_STARTER + '/posts/' + postId,
             { "option": vote },
-            options).catch((err) => alert('There was an error, the data is inconsistent, refresh the page and try again' + err))
+            options).catch((err) => alert('There was an error, the data is inconsistent, refresh the page and try again. ' + err))
     }
 }
 
@@ -32,7 +32,7 @@ export function addPost(values, history) {
                 dispatch(ActionCreator.addPost(res.data))
                 dispatch(ActionCreator.dataReceived());
                 history.push('/' + res.data.category + '/' + res.data.id);
-            }).catch((err) => alert('There was an error on create a post, the data is inconsistent, refresh and try again.' + err))
+            }).catch((err) => alert('There was an error on create a post, the data is inconsistent, refresh and try again. ' + err))
     }
 }
 
@@ -53,7 +53,7 @@ export function deletePost(id) {
         dispatch(ActionCreator.deletePost(id));
         axios.delete(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, options)
             .catch((err) => {
-                alert('There was an error on delete a post, the data is inconsistent, refresh and try again.' + err)
+                alert('There was an error on delete a post, the data is inconsistent, refresh and try again. ' + err)
             });
     }
 }
@@ -66,7 +66,7 @@ export function selectPost(id) {
                 dispatch(ActionCreator.selectPost(res.data));
             })
             .catch((err) => {
-                alert('There was an error on delete a post, the data is inconsistent, refresh and try again.' + err)
+                alert('There was an error on selectPost a post, the data is inconsistent, refresh and try again. ' + err)
             });
     }
 }

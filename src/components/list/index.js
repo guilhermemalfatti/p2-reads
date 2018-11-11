@@ -8,29 +8,54 @@ let postDate = (timestamp) => {
 }
 
 export default function List(props) {
-    return (
-        <React.Fragment>
-            {props.items && props.items.map((post) => (
-                <div className="question" data-color={props.color(post.voteScore)}>
-                    <div className="votes">
-                        <div className="upvote" onClick={() => props.vote(post.id, 'upVote')}></div>
-                        <div className="number-of-votes">{post.voteScore}</div>
-                        <div className="downvote" onClick={() => props.vote(post.id, 'downVote')}></div>
-                    </div>
+    if (props.type === "post") {
+        return (
+            <React.Fragment>
+                {props.items && props.items.map((post) => (
+                    <div className="question" data-color={props.color(post.voteScore)}>
+                        <div className="votes">
+                            <div className="upvote" onClick={() => props.vote(post.id, 'upVote')}></div>
+                            <div className="number-of-votes">{post.voteScore}</div>
+                            <div className="downvote" onClick={() => props.vote(post.id, 'downVote')}></div>
+                        </div>
 
-                    <div className="question-and-answer">
-                        <Link to={process.env.PUBLIC_URL + '/' + post.category + '/' + post.id} >
-                            <h2>{post.title}</h2>
-                        </Link>
+                        <div className="question-and-answer">
+                            <Link to={process.env.PUBLIC_URL + '/' + post.category + '/' + post.id} >
+                                <h2>{post.title}</h2>
+                            </Link>
 
-                        <p className="author">{post.author} - {postDate(post.timestamp)}</p>
-                        <p>{post.body}</p>
+                            <p className="author">{post.author} - {postDate(post.timestamp)}</p>
+                            <p>{post.body}</p>
+                        </div>
+                        <div className="social">
+                            <div className="post-comments">{post.commentCount}</div>
+                        </div>
                     </div>
-                    <div className="social">
-                        <div className="post-comments">{post.commentCount}</div>
-                    </div>
-                </div>
-            ))}
-        </React.Fragment>
-    )
+                ))}
+            </React.Fragment>
+        )
+    } else {
+        return (
+            <React.Fragment>
+                {props.items && props.items.map((item, index) => (
+                    <li key={index}>
+                        <div className="user-comment">
+                            <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png"} alt="" />
+                            <header><a href="#" className="name">{item.author}</a><span>{postDate(item.timestamp)}</span></header>
+                            <div className="content">
+                                <p>{item.body}</p>
+                            </div>
+                            <a href="#" className="edit">edit</a>
+                            <a href="#" className="delete">delete</a>
+                        </div>
+                    </li>
+                ))}
+
+                {props.items.length === 0 &&
+                <p>There is not comments, be the first to comment.</p>
+                }
+            </React.Fragment>
+        )
+    }
+
 }

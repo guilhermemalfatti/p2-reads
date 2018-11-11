@@ -7,7 +7,7 @@ import posts from './posts';
 
 export default combineReducers({
     categories,
-    //comment,
+    comment,
     loading,
     posts
 })
