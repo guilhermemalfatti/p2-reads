@@ -9,6 +9,7 @@ import Loading from '../loading/index';
 import moment from 'moment';
 import { postVote } from '../../actions/post';
 import ModalPost from '../modalPost/index';
+import CommentForm from '../commentForm/index';
 import List from '../list/index';
 import { defineColor } from '../../util/index';
 
@@ -143,14 +144,15 @@ class PostsPage extends Component {
                             </div>
 
                             <div className="comments">
+                                <CommentForm />
                                 <ul>
                                     {!hideComment &&
-                                    <List
-                                        items={comments}
-                                        type="comment"
-                                        vote={this.commentVote}
-                                        color={defineColor}
-                                    />
+                                        <List
+                                            items={comments}
+                                            type="comment"
+                                            vote={this.commentVote}
+                                            color={defineColor}
+                                        />
                                     }
                                 </ul>
                             </div>

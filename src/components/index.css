@@ -3,7 +3,7 @@
 	width:60px;
 	height:60px;
 	bottom:40px;
-	right:40px;
+	right:17px;
 	background-color:#999;
 	color:#FFF;
 	border-radius:50px;
@@ -16,32 +16,32 @@
 
 
 .float-linkedin{
-    position:fixed;
+  position:fixed;
 	width:60px;
 	height:60px;
 	bottom:110px;
-	right:40px;
+	right:17px;
 	background-color:#999;
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
-    font-size:30px;
+  font-size:30px;
 	box-shadow: 2px 2px 3px #999;
   z-index:100;
 }
 
 
 .float-github{
-    position:fixed;
+  position:fixed;
 	width:60px;
 	height:60px;
 	bottom:180px;
-	right:40px;
+	right:17px;
 	background-color:#999;
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
-    font-size:30px;
+  font-size:30px;
 	box-shadow: 2px 2px 3px #999;
   z-index:100;
 }
