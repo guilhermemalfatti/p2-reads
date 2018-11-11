@@ -10,7 +10,7 @@ export const { Types, Creators } = createActions({
   selectPost: ['post'],
 
   addComment: ['comment'],
-  editComment: ['comment'],
+  editComment: ['commentId', 'values'],
   deleteComment: ['commentId'],
   getComments: ['comments'],
 

@@ -19,11 +19,14 @@ class PostsPage extends Component {
 
         this.state = {
             editing: false,
-            hideComment: true,
-            labelHideComment: 'Show Comments'
+            hideComment: false,
+            labelHideComment: 'Hide Comments',
+            commentBeingEdited: {},
+            edititngComment: false
         };
 
         this.toggleComments = this.toggleComments.bind(this);
+        this.setEditComment = this.setEditComment.bind(this);
     }
 
 
@@ -76,9 +79,23 @@ class PostsPage extends Component {
         });
     }
 
+    setEditComment = (comment) => {
+        this.setState({
+            commentBeingEdited: comment,
+            edititngComment: true
+        })
+    }
+
+    cancelCommentEdit = () => {
+        this.setState({
+            commentBeingEdited: null,
+            edititngComment: false
+        })
+    }
+
     render() {
         let { isLoading, post, comments } = this.props;
-        let { hideComment, labelHideComment } = this.state;
+        let { hideComment, labelHideComment, commentBeingEdited, edititngComment } = this.state;
 
         if (this.state.editing) {
 
@@ -138,13 +155,13 @@ class PostsPage extends Component {
                             <div className="hide-comments">
                                 <input type="checkbox" value="" id="hide-button" name="check" />
                                 <label className="button" onClick={this.toggleComments}>{labelHideComment}</label>
-
-                                <input type="checkbox" value="" id="new-comment" name="check" />
-                                <label className="button">New Comment</label>
                             </div>
 
                             <div className="comments">
-                                <CommentForm />
+                                <CommentForm
+                                    comment={commentBeingEdited}
+                                    edititngComment={edititngComment}
+                                    cancelCommentEdit={this.cancelCommentEdit} />
                                 <ul>
                                     {!hideComment &&
                                         <List
@@ -152,6 +169,7 @@ class PostsPage extends Component {
                                             type="comment"
                                             vote={this.commentVote}
                                             color={defineColor}
+                                            editComment={this.setEditComment}
                                         />
                                     }
                                 </ul>

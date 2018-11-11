@@ -120,7 +120,7 @@ class ModalPost extends Component {
 
                 </select>
                 <button type="submit">Submit Post</button>&nbsp;
-                            <button type="reset" onClick={this.handleHide}>Cancel</button>
+                <button type="reset" onClick={this.handleHide}>Cancel</button>
               </div>
             </form>
 

@@ -12,8 +12,23 @@ const getComments = (state = INITIAL_STATE, action) => {
     }
 }
 
+const editComment = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        items: state.items.map((item)=>{
+            if(item.id === action.commentId){
+                item.body = action.values.body;
+                item.timestamp = action.values.timestamp;
+            }
+            return item;
+        })
+    }
+}
+
+
 const HANDLERS = {
-    [Types.GET_COMMENTS]: getComments
+    [Types.GET_COMMENTS]: getComments,
+    [Types.EDIT_COMMENT]: editComment
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)
