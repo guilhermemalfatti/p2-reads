@@ -3,7 +3,6 @@ import ActionCreator from './actionCreators';
 import token from '../config/config';
 import { API_ENDPOINT } from '../config/config';
 
-const uuidv4 = require('uuid/v4');
 const options = { headers: { "Authorization": token } };
 
 export function getComments(postId) {
@@ -31,14 +30,14 @@ export function editComment(commentId, values) {
     }
 }
 
-/* export function newComment(postId) {
+export function newComment(values) {
     return (dispatch) => {
-        axios.get(API_ENDPOINT.READABLE_STARTER + '/posts/' + postId + "/comments", options)
+        axios.post(API_ENDPOINT.READABLE_STARTER + '/comments', values, options)
             .then((res) => {
-
+                dispatch(ActionCreator.addComment(res.data));
             })
             .catch((err) => {
                 alert('There was an error on newComment, the data is inconsistent, refresh and try again. ' + err)
             });
     }
-} */
+}

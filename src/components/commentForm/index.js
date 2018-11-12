@@ -4,8 +4,9 @@ import getCategories from '../../actions/categories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ActionCreator from '../../actions/actionCreators';
-import { editComment } from '../../actions/comment';
+import { editComment, newComment } from '../../actions/comment';
 import serializeForm from 'form-serialize';
+const uuidv4 = require('uuid/v4');
 
 class CommentForm extends Component {
     constructor(props, context) {
@@ -17,6 +18,7 @@ class CommentForm extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.clearForm = this.clearForm.bind(this);
     }
 
     componentWillReceiveProps(props) {
@@ -43,7 +45,7 @@ class CommentForm extends Component {
     }
 
     handleSubmit(e) {
-        const { dispatch, edititngComment, comment } = this.props;
+        const { dispatch, edititngComment, comment, selectedPost } = this.props;
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
         values['timestamp'] = new Date().getTime();
@@ -51,9 +53,21 @@ class CommentForm extends Component {
         if (edititngComment) {
             dispatch(editComment(comment.id, values));
         } else {
-            //dispatch(addPost(values, history));
-            alert('new');
+            values['id'] = uuidv4();
+            values['parentId'] = selectedPost.id;
+            dispatch(newComment(values));
         }
+    }
+
+    clearForm() {
+        let { cancelCommentEdit } = this.props;
+
+        this.setState({
+            body: '',
+            author: ''
+        });
+
+        cancelCommentEdit();
     }
 
     render() {
@@ -67,7 +81,7 @@ class CommentForm extends Component {
                         <input className="author" disabled={edititngComment} type='text' name='author' placeholder='Author' value={author} onChange={(event) => this.handleAuthorChange(event)} />
                         <br />
                         <button type="submit">Submit comment</button>&nbsp;
-                        <button type="button" onClick={cancelCommentEdit}>Cancel</button>
+                        <button type="button" onClick={this.clearForm}>Cancel</button>
                     </div>
                 </form>
 
@@ -77,4 +91,6 @@ class CommentForm extends Component {
     }
 }
 
-export default connect()(CommentForm)
+export default connect((state) => ({
+    selectedPost: state.posts.selectedPost || {}
+}))(CommentForm)

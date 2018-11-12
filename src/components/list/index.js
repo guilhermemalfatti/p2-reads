@@ -4,7 +4,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 let postDate = (timestamp) => {
-    return moment(timestamp).format('YY/MM/DD HH:mm:ss');
+    return moment(timestamp).format('DD/MM/YY HH:mm:ss');
 }
 
 export default function List(props) {

@@ -135,6 +135,16 @@ const editPost = (state = INITIAL_STATE, action) => {
   }
 }
 
+const addComment = (state = INITIAL_STATE, action) => {
+  return {
+      ...state,
+      selectedPost: {
+        ...state.selectedPost,
+        commentCount: state.selectedPost.commentCount + 1
+      }
+  }
+}
+
 const HANDLERS = {
   [Types.ADD_POST]: addPost,
   [Types.INITIAL_DATA]: initialdata,
@@ -145,7 +155,8 @@ const HANDLERS = {
   [Types.SELECT_POST]: selectPost,
   [Types.VOTE_SELECTED_POST]: voteSelectedPost,
   [Types.DELETE_POST]: deletePost,
-  [Types.EDIT_POST]: editPost
+  [Types.EDIT_POST]: editPost,
+  [Types.ADD_COMMENT]: addComment,
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

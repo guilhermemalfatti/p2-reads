@@ -12,6 +12,13 @@ const getComments = (state = INITIAL_STATE, action) => {
     }
 }
 
+const addComment = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        items: state.items.concat(action.comment)
+    }
+}
+
 const editComment = (state = INITIAL_STATE, action) => {
     return {
         ...state,
@@ -28,6 +35,7 @@ const editComment = (state = INITIAL_STATE, action) => {
 
 const HANDLERS = {
     [Types.GET_COMMENTS]: getComments,
+    [Types.ADD_COMMENT]: addComment,
     [Types.EDIT_COMMENT]: editComment
 }
 
