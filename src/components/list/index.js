@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import style from './voteStyle.css';
 
 let postDate = (timestamp) => {
     return moment(timestamp).format('DD/MM/YY HH:mm:ss');
@@ -39,20 +40,25 @@ export default function List(props) {
             <React.Fragment>
                 {props.items && props.items.map((item, index) => (
                     <li key={index}>
-                        <div className="user-comment">
+                         <div className={`user-comment ${item.voteScore > 2 ? style.green : item.voteScore >= 0 && item.voteScore <= 2 ? style.yellow : style.red}`}>
+                            <div className="comment-votes">
+                                <div className="upvote"></div>
+                                <div className="number-of-votes">{item.voteScore}</div>
+                                <div className="downvote"></div>
+                            </div>
                             <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png"} alt="" />
                             <header><a href="#" className="name">{item.author}</a><span>{postDate(item.timestamp)}</span></header>
                             <div className="content">
                                 <p>{item.body}</p>
                             </div>
-                            <a className="edit" onClick={()=>{props.editComment(item)}}>edit</a>
-                            <a className="delete" onClick={()=>{props.onDeleteComment(item)}}>delete</a>
+                            <a className="edit" onClick={() => { props.editComment(item) }}>edit</a>
+                            <a className="delete" onClick={() => { props.onDeleteComment(item) }}>delete</a>
                         </div>
                     </li>
                 ))}
 
                 {props.items.length === 0 &&
-                <p>There is not comments, be the first to comment.</p>
+                    <p>There is not comments, be the first to comment.</p>
                 }
             </React.Fragment>
         )

@@ -41,3 +41,55 @@
     cursor:pointer;
   }
 
+  #post .comment-votes {
+    left: -25px;
+    position: absolute;
+    top: -4px;
+
+  }
+
+  #post .comment-votes .upvote {
+    position: relative;
+    padding: 0.2em;
+    cursor: pointer;
+  }
+  #post .comment-votes .upvote:after {
+    content: "";
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    text-align: center;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid rgba(0, 0, 0, 0.75);
+  }
+  #post .comment-votes .number-of-votes {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.25em;
+  }
+  #post .comment-votes .downvote {
+    position: relative;
+    padding: 0.2em;
+    cursor: pointer;
+  }
+  #post .comment-votes .downvote:after {
+    content: "";
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    text-align: center;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid rgba(0, 0, 0, 0.75);
+  }

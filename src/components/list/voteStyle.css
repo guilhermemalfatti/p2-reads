@@ -1,0 +1,12 @@
+:local(.red) {
+    border-top: 4px solid #ea0000;
+    border-radius: 5px;
+  }
+  :local(.yellow) {
+    border-top: 4px solid #ffba00;
+    border-radius: 5px;
+  }
+  :local(.green) {
+    border-top: 4px solid #7ad03a;
+    border-radius: 5px;
+  }
