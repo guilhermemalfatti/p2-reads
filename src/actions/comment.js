@@ -32,7 +32,7 @@ export function editComment(commentId, values) {
 
 export function newComment(values) {
     //if there is no author, add ananymous value
-    if(!values.author){
+    if (!values.author) {
         values['author'] = 'anonymous'
     }
     return (dispatch) => {
@@ -54,5 +54,18 @@ export function deleteComment(comment) {
             .catch((err) => {
                 alert('There was an error on delete a comment, the data is inconsistent, refresh and try again. ' + err)
             });
+    }
+}
+
+export function commentVote(comment, vote) {
+    return (dispatch) => {
+        //that aims to avoid an if/else statement
+        dispatch(ActionCreator[vote](comment));
+
+        return axios.post(
+            API_ENDPOINT.READABLE_STARTER + '/comments/' + comment,
+            { "option": vote },
+            options)
+            .catch((err) => alert('There was an error, the data is inconsistent, refresh the page and try again. ' + err))
     }
 }

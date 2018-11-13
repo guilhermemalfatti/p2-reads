@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import style from './voteStyle.css';
 import { selectPost, deletePost } from '../../actions/post';
-import { getComments, deleteComment } from '../../actions/comment';
+import { getComments, deleteComment, commentVote} from '../../actions/comment';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import Loading from '../loading/index';
@@ -27,6 +27,7 @@ class PostsPage extends Component {
 
         this.toggleComments = this.toggleComments.bind(this);
         this.setEditComment = this.setEditComment.bind(this);
+        this.commentVote = this.commentVote.bind(this);
     }
 
     componentDidMount() {
@@ -55,8 +56,10 @@ class PostsPage extends Component {
      * @param {object} postId - The comment id
      * @param {object} vote - The vote
      */
-    commentVote(postId, vote) {
-        //TODO
+    commentVote(commentId, vote) {
+        let { dispatch } = this.props;
+
+        dispatch(commentVote(commentId, vote));
     }
 
     postDate = (timestamp) => {

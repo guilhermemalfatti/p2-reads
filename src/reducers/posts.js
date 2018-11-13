@@ -27,7 +27,7 @@ const downVote = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     items: state.items.map((item) => {
-      if (item.id === action.postId) {
+      if (item.id === action.id) {
         item.voteScore -= 1;
       }
       return item;
@@ -39,7 +39,7 @@ const upVote = (state = INITIAL_STATE, action) => {
   return {
     ...state,
     items: state.items.map((item) => {
-      if (item.id === action.postId) {
+      if (item.id === action.id) {
         item.voteScore += 1;
       }
       return item;

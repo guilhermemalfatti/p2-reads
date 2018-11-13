@@ -22,8 +22,8 @@ const addComment = (state = INITIAL_STATE, action) => {
 const editComment = (state = INITIAL_STATE, action) => {
     return {
         ...state,
-        items: state.items.map((item)=>{
-            if(item.id === action.commentId){
+        items: state.items.map((item) => {
+            if (item.id === action.commentId) {
                 item.body = action.values.body;
                 item.timestamp = action.values.timestamp;
             }
@@ -34,17 +34,44 @@ const editComment = (state = INITIAL_STATE, action) => {
 
 const deleteComment = (state = INITIAL_STATE, action) => {
     return {
+        ...state,
+        items: state.items.filter((item) => item.id !== action.comment.id)
+    }
+}
+
+const downVote = (state = INITIAL_STATE, action) => {
+    return {
       ...state,
-      items: state.items.filter((item) => item.id !== action.comment.id)
+      items: state.items.map((item) => {
+        if (item.id === action.id) {
+          item.voteScore -= 1;
+        }
+        return item;
+      })
     }
   }
+
+  const upVote = (state = INITIAL_STATE, action) => {
+    return {
+      ...state,
+      items: state.items.map((item) => {
+        if (item.id === action.id) {
+          item.voteScore += 1;
+        }
+        return item;
+      })
+    }
+  }
+
 
 
 const HANDLERS = {
     [Types.GET_COMMENTS]: getComments,
     [Types.ADD_COMMENT]: addComment,
     [Types.EDIT_COMMENT]: editComment,
-    [Types.DELETE_COMMENT]: deleteComment
+    [Types.DELETE_COMMENT]: deleteComment,
+    [Types.DOWN_VOTE]: downVote,
+    [Types.UP_VOTE]: upVote,
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)
