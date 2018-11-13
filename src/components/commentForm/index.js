@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import ActionCreator from '../../actions/actionCreators';
 import { editComment, newComment } from '../../actions/comment';
 import serializeForm from 'form-serialize';
+import _ from 'lodash';
+
 const uuidv4 = require('uuid/v4');
 
 class CommentForm extends Component {
@@ -57,6 +59,8 @@ class CommentForm extends Component {
             values['parentId'] = selectedPost.id;
             dispatch(newComment(values));
         }
+
+        this.clearForm();
     }
 
     clearForm() {
@@ -73,6 +77,7 @@ class CommentForm extends Component {
     render() {
         let { cancelCommentEdit, edititngComment } = this.props;
         let { body, author } = this.state;
+        const disabled = _.isEmpty(body) || _.isEmpty(author);
         return (
             <div id="comment-form" >
                 <form onSubmit={this.handleSubmit} >
@@ -80,7 +85,7 @@ class CommentForm extends Component {
                         <textarea type='text' name='body' placeholder='Comment body' value={body} onChange={(event) => this.handleBodyChange(event)} />
                         <input className="author" disabled={edititngComment} type='text' name='author' placeholder='Author' value={author} onChange={(event) => this.handleAuthorChange(event)} />
                         <br />
-                        <button type="submit">Submit comment</button>&nbsp;
+                        <button type="submit" disabled={disabled}>Submit comment</button>&nbsp;
                         <button type="button" onClick={this.clearForm}>Cancel</button>
                     </div>
                 </form>

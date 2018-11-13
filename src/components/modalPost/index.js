@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/lib/Modal';
 import serializeForm from 'form-serialize';
 import { connect } from 'react-redux';
 import { addPost, editPost } from '../../actions/post';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 
 class ModalPost extends Component {
   constructor(props, context) {
@@ -89,7 +90,7 @@ class ModalPost extends Component {
   render() {
     let { categories, editing } = this.props;
     const { title, body, author, category } = this.state
-
+    const disabled = _.isEmpty(title) || _.isEmpty(category) || _.isEmpty(body) || _.isEmpty(author);
     return (
 
 
@@ -119,7 +120,7 @@ class ModalPost extends Component {
                   ))}
 
                 </select>
-                <button type="submit">Submit Post</button>&nbsp;
+                <button type="submit" disabled={disabled}>Submit Post</button>&nbsp;
                 <button type="reset" onClick={this.handleHide}>Cancel</button>
               </div>
             </form>
