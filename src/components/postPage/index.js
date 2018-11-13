@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import style from './voteStyle.css';
 import { selectPost, deletePost } from '../../actions/post';
-import { getComments, deleteComment, commentVote} from '../../actions/comment';
+import { getComments, deleteComment, commentVote } from '../../actions/comment';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import Loading from '../loading/index';
@@ -12,8 +12,15 @@ import ModalPost from '../modalPost/index';
 import CommentForm from '../commentForm/index';
 import List from '../list/index';
 import { defineColor } from '../../util/index';
+import PropTypes from 'prop-types';
 
 class PostsPage extends Component {
+    static propTypes = {
+        post: PropTypes.object.isRequired,
+        comments: PropTypes.array.isRequired,
+        isLoading: PropTypes.bool.isRequired
+    }
+
     constructor(props) {
         super(props);
 

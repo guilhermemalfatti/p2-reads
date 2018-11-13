@@ -5,29 +5,34 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ActionCreator from '../../actions/actionCreators';
 import receiveInitialData from '../../actions/shared';
+import PropTypes from 'prop-types';
 
 class Header extends Component {
+    static propTypes = {
+        originalPosts: PropTypes.array.isRequired,
+        categories: PropTypes.array.isRequired
+    }
 
     componentDidMount() {
         const { dispatch, originalPosts } = this.props
         const { category } = this.props.match.params;
 
         //in order to request initial data, only in the first time.
-        if(originalPosts.length === 0){
+        if (originalPosts.length === 0) {
             dispatch(receiveInitialData(category));
         }
 
         dispatch(getCategories());
     }
 
-    filter = (category) =>{
+    filter = (category) => {
         let { originalPosts } = this.props;
         let filteredPosts;
         const { dispatch } = this.props
-        if(category === 'all' || !category){
+        if (category === 'all' || !category) {
             dispatch(ActionCreator.updateList(originalPosts));
-        }else{
-            filteredPosts = originalPosts.filter((item)=> item.category === category);
+        } else {
+            filteredPosts = originalPosts.filter((item) => item.category === category);
             dispatch(ActionCreator.updateList(filteredPosts));
         }
         dispatch(ActionCreator.selectCategory(category));
@@ -46,18 +51,18 @@ class Header extends Component {
                             <span className="active"> All </span> :
 
                             <Link to="/" >
-                                <span onClick={()=>{this.filter('all')}}> All </span>
+                                <span onClick={() => { this.filter('all') }}> All </span>
                             </Link>
                         }
                         {categories && categories.map((cat) => (
 
                             category === cat.path ?
                                 <Link key={cat.path} to={'/'.concat(cat.path)} >
-                                    <span className="active" onClick={()=>{this.filter(cat.path)}}> {cat.name} </span>
+                                    <span className="active" onClick={() => { this.filter(cat.path) }}> {cat.name} </span>
                                 </Link>
                                 :
                                 <Link key={cat.path} to={'/'.concat(cat.path)} >
-                                    <span onClick={()=>{this.filter(cat.path)}}> {cat.name} </span>
+                                    <span onClick={() => { this.filter(cat.path) }}> {cat.name} </span>
                                 </Link>
 
                         ))}

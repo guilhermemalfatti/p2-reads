@@ -7,8 +7,14 @@ import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import ModalPost from '../modalPost/index';
 import { defineColor } from '../../util/index';
+import PropTypes from 'prop-types';
 
 class Posts extends Component {
+    static propTypes = {
+        post: PropTypes.object,
+        isLoading: PropTypes.bool.isRequired
+    }
+
     state = {
         sortByDesc: 'Sort by',
         searchValue: '',

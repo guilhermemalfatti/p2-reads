@@ -6,8 +6,17 @@ import { connect } from 'react-redux';
 import { addPost, editPost } from '../../actions/post';
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 class ModalPost extends Component {
+  static propTypes = {
+    post: PropTypes.object,
+    showModal: PropTypes.array,
+    categorie: PropTypes.array,
+    editing: PropTypes.string,
+    selectedPost: PropTypes.object.isRequired
+  }
+
   constructor(props, context) {
     super(props, context);
 
@@ -116,7 +125,7 @@ class ModalPost extends Component {
                 <select disabled={editing} name="category" value={category} onChange={(event) => this.handleCategoryChange(event)}>
                   <option>Category</option>
                   {categories && categories.map((cat) => (
-                    <option value={cat.name}>{cat.name}</option>
+                    <option key={cat.name} value={cat.name}>{cat.name}</option>
                   ))}
 
                 </select>

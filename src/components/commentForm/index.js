@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import './index.css';
-import getCategories from '../../actions/categories';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ActionCreator from '../../actions/actionCreators';
 import { editComment, newComment } from '../../actions/comment';
 import serializeForm from 'form-serialize';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 const uuidv4 = require('uuid/v4');
 
 class CommentForm extends Component {
+    static propTypes = {
+        comment: PropTypes.object.isRequired,
+        edititngComment: PropTypes.bool,
+        selectedPost: PropTypes.object
+    }
     constructor(props, context) {
         super(props, context);
 
@@ -75,7 +79,7 @@ class CommentForm extends Component {
     }
 
     render() {
-        let { cancelCommentEdit, edititngComment } = this.props;
+        let { edititngComment } = this.props;
         let { body, author } = this.state;
         const disabled = _.isEmpty(body) || _.isEmpty(author);
         return (
