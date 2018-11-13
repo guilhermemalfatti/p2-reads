@@ -46,7 +46,7 @@ export default function List(props) {
                                 <p>{item.body}</p>
                             </div>
                             <a className="edit" onClick={()=>{props.editComment(item)}}>edit</a>
-                            <a className="delete">delete</a>
+                            <a className="delete" onClick={()=>{props.onDeleteComment(item)}}>delete</a>
                         </div>
                     </li>
                 ))}

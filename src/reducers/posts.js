@@ -138,9 +138,33 @@ const editPost = (state = INITIAL_STATE, action) => {
 const addComment = (state = INITIAL_STATE, action) => {
   return {
       ...state,
+      items: state.items.map((item) => {
+        if (item.id === action.comment.parentId) {
+          item.commentCount += 1;
+        }
+        return item;
+      }),
       selectedPost: {
         ...state.selectedPost,
         commentCount: state.selectedPost.commentCount + 1
+      }
+  }
+}
+
+
+
+const deleteComment = (state = INITIAL_STATE, action) => {
+  return {
+      ...state,
+      items: state.items.map((item) => {
+        if (item.id === action.comment.parentId) {
+          item.commentCount -= 1;
+        }
+        return item;
+      }),
+      selectedPost: {
+        ...state.selectedPost,
+        commentCount: state.selectedPost.commentCount - 1
       }
   }
 }
@@ -157,6 +181,7 @@ const HANDLERS = {
   [Types.DELETE_POST]: deletePost,
   [Types.EDIT_POST]: editPost,
   [Types.ADD_COMMENT]: addComment,
+  [Types.DELETE_COMMENT]: deleteComment,
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

@@ -32,11 +32,19 @@ const editComment = (state = INITIAL_STATE, action) => {
     }
 }
 
+const deleteComment = (state = INITIAL_STATE, action) => {
+    return {
+      ...state,
+      items: state.items.filter((item) => item.id !== action.comment.id)
+    }
+  }
+
 
 const HANDLERS = {
     [Types.GET_COMMENTS]: getComments,
     [Types.ADD_COMMENT]: addComment,
-    [Types.EDIT_COMMENT]: editComment
+    [Types.EDIT_COMMENT]: editComment,
+    [Types.DELETE_COMMENT]: deleteComment
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './index.css';
 import style from './voteStyle.css';
 import { selectPost, deletePost } from '../../actions/post';
-import { getComments } from '../../actions/comment';
+import { getComments, deleteComment } from '../../actions/comment';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import Loading from '../loading/index';
@@ -29,7 +29,6 @@ class PostsPage extends Component {
         this.setEditComment = this.setEditComment.bind(this);
     }
 
-
     componentDidMount() {
         const { post_id } = this.props.match.params
         const { dispatch } = this.props
@@ -51,6 +50,11 @@ class PostsPage extends Component {
         dispatch(ActionCreator.voteSelectedPost(vote));
     }
 
+    /**
+     * @description Handle the comment vote (upvote and downvote)
+     * @param {object} postId - The comment id
+     * @param {object} vote - The vote
+     */
     commentVote(postId, vote) {
         //TODO
     }
@@ -91,6 +95,13 @@ class PostsPage extends Component {
             commentBeingEdited: null,
             edititngComment: false
         })
+    }
+
+    deleteComment = (comment) => {
+        const { dispatch } = this.props
+
+        //api call
+        dispatch(deleteComment(comment));
     }
 
     render() {
@@ -170,6 +181,7 @@ class PostsPage extends Component {
                                             vote={this.commentVote}
                                             color={defineColor}
                                             editComment={this.setEditComment}
+                                            onDeleteComment={this.deleteComment}
                                         />
                                     }
                                 </ul>

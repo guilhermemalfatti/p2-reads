@@ -11,7 +11,7 @@ export const { Types, Creators } = createActions({
 
   addComment: ['comment'],
   editComment: ['commentId', 'values'],
-  deleteComment: ['commentId'],
+  deleteComment: ['comment'],
   getComments: ['comments'],
 
   initialData: ['posts', 'filter'],

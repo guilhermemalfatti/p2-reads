@@ -31,6 +31,10 @@ export function editComment(commentId, values) {
 }
 
 export function newComment(values) {
+    //if there is no author, add ananymous value
+    if(!values.author){
+        values['author'] = 'anonymous'
+    }
     return (dispatch) => {
         axios.post(API_ENDPOINT.READABLE_STARTER + '/comments', values, options)
             .then((res) => {
@@ -38,6 +42,17 @@ export function newComment(values) {
             })
             .catch((err) => {
                 alert('There was an error on newComment, the data is inconsistent, refresh and try again. ' + err)
+            });
+    }
+}
+
+export function deleteComment(comment) {
+    return (dispatch) => {
+        //remove from state
+        dispatch(ActionCreator.deleteComment(comment));
+        axios.delete(API_ENDPOINT.READABLE_STARTER + '/comments/' + comment.id, options)
+            .catch((err) => {
+                alert('There was an error on delete a comment, the data is inconsistent, refresh and try again. ' + err)
             });
     }
 }
