@@ -48,7 +48,7 @@ class PostsPage extends Component {
     toggleComments() {
         this.setState((state) => ({
             hideComment: !state.hideComment,
-            labelHideComment: !state.hideComment == true ? "Show Comments" : "Hide Comments"
+            labelHideComment: !state.hideComment === true ? "Show Comments" : "Hide Comments"
         }))
     }
 

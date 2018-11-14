@@ -11,9 +11,9 @@ import PropTypes from 'prop-types';
 class ModalPost extends Component {
   static propTypes = {
     post: PropTypes.object,
-    showModal: PropTypes.array,
+    showModal: PropTypes.bool,
     categorie: PropTypes.array,
-    editing: PropTypes.string,
+    editing: PropTypes.bool,
     selectedPost: PropTypes.object.isRequired
   }
 
@@ -26,10 +26,10 @@ class ModalPost extends Component {
     this.state = {
       show: false,
       showAlert: false,
-      title: props.post && props.post.title || '',
-      body: props.post && props.post.body || '',
-      author: props.post && props.post.author || '',
-      category: props.post && props.post.category || ''
+      title: (props.post && (props.post.title || '')) || '',
+      body: (props.post && (props.post.body || '')) || '',
+      author: (props.post && (props.post.author || '')) || '',
+      category: (props.post && (props.post.category || '')) || ''
     };
   }
 
@@ -104,16 +104,15 @@ class ModalPost extends Component {
 
 
       <React.Fragment>
-        {editing != true && <button onClick={this.handleShow}>ADD</button>}
+        {editing !== true && <button onClick={this.handleShow}>ADD</button>}
         <Modal
-          {...this.props}
           show={this.state.show}
           onHide={this.handleHide}
           dialogClassName="custom-modal"
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {editing == true ? 'Edit post' : 'New post'}
+              {editing === true ? 'Edit post' : 'New post'}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

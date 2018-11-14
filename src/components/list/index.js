@@ -40,14 +40,17 @@ export default function List(props) {
             <React.Fragment>
                 {props.items && props.items.map((item, index) => (
                     <li key={index}>
-                         <div className={`user-comment ${item.voteScore > 2 ? style.green : item.voteScore >= 0 && item.voteScore <= 2 ? style.yellow : style.red}`}>
+                        <div className={`user-comment ${item.voteScore > 2 ? style.green : item.voteScore >= 0 && item.voteScore <= 2 ? style.yellow : style.red}`}>
                             <div className="comment-votes">
                                 <div className="upvote" onClick={() => props.vote(item.id, 'upVote')}></div>
                                 <div className="number-of-votes">{item.voteScore}</div>
                                 <div className="downvote" onClick={() => props.vote(item.id, 'downVote')}></div>
                             </div>
                             <img src={"https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png"} alt="" />
-                            <header><a href="#" className="name">{item.author}</a><span>{postDate(item.timestamp)}</span></header>
+                            <header>
+                                <a className="name">{item.author}</a>
+                                <span>{postDate(item.timestamp)}</span>
+                            </header>
                             <div className="content">
                                 <p>{item.body}</p>
                             </div>

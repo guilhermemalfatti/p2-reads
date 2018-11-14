@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { editComment, newComment } from '../../actions/comment';
 import serializeForm from 'form-serialize';
 import _ from 'lodash';
@@ -11,7 +10,7 @@ const uuidv4 = require('uuid/v4');
 
 class CommentForm extends Component {
     static propTypes = {
-        comment: PropTypes.object.isRequired,
+        comment: PropTypes.object,
         edititngComment: PropTypes.bool,
         selectedPost: PropTypes.object
     }
@@ -19,8 +18,8 @@ class CommentForm extends Component {
         super(props, context);
 
         this.state = {
-            body: props.comment && props.comment.body || '',
-            author: props.comment && props.comment.author || ''
+            body: (props.comment && (props.comment.body || '')) || '',
+            author: (props.comment && (props.comment.author || '')) || ''
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,8 +28,8 @@ class CommentForm extends Component {
 
     componentWillReceiveProps(props) {
         this.setState({
-            body: props.comment && props.comment.body || '',
-            author: props.comment && props.comment.author || ''
+            body: (props.comment && (props.comment.body || '')) || '',
+            author: (props.comment && (props.comment.author || '')) || ''
         });
     }
 

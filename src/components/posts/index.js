@@ -71,7 +71,7 @@ class Posts extends Component {
                             <input value={this.state.searchValue} type="text" onChange={this.filterList} placeholder="Have a question? Search for post by keywords" />
                         </div>
                         <button onClick={this.resetFilter}>Reset</button>
-                        <ModalPost />
+                        <ModalPost showModal={false}/>
                         <div className="dropdown">
                             <button className="dropbtn">{sortByDesc}<span className="caret"></span></button>
                             <div className="dropdown-content">
@@ -81,7 +81,7 @@ class Posts extends Component {
                         </div>
                     </div>
 
-                    {isLoading == true ?
+                    {isLoading === true ?
                         <Loading /> :
                         <List
                             items={posts}
