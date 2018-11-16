@@ -12,6 +12,8 @@ export default function List(props) {
     if (props.type === "post") {
         return (
             <React.Fragment>
+                {props.items.length === 0 &&
+                <p>Empty list</p>}
                 {props.items && props.items.map((post) => (
                     <div key={post.id} className="question" data-color={props.color(post.voteScore)}>
                         <div className="votes">

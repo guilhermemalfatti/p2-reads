@@ -11,10 +11,10 @@ class App extends Component {
     return (
       <div>
 
-        <Link to="//github.com/guilhermemalfatti" className="float-github">
+        <Link to="http://github.com/guilhermemalfatti" className="float-github">
           <i className="fa fa-github"></i>
         </Link>
-        <Link to="//www.linkedin.com/in/guilherme-malfatti-b2683966" className="float-linkedin">
+        <Link to="http://www.linkedin.com/in/guilherme-malfatti-b2683966" className="float-linkedin">
           <i className="fa fa-linkedin"></i>
         </Link>
 
