@@ -2,7 +2,7 @@
   "name": "p2-reads",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://p2-reads-app.herokuapp.com/",
+  "homepage": "https://guilhermemalfatti.github.io/p2-reads",
   "dependencies": {
     "axios": "^0.18.0",
     "form-serialize": "^0.7.2",
