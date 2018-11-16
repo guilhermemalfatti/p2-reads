@@ -17,9 +17,6 @@ class App extends Component {
         <Link to="//www.linkedin.com/in/guilherme-malfatti-b2683966" className="float-linkedin">
           <i className="fa fa-linkedin"></i>
         </Link>
-        <Link to={process.env.PUBLIC_URL + '/'} className="float-home">
-          <i className="fa fa-home"></i>
-        </Link>
 
         <Route path={process.env.PUBLIC_URL + '/:category'} component={Header} />
         <Route exact path={process.env.PUBLIC_URL + '/'} component={Header} />
