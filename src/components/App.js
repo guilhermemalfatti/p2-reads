@@ -11,12 +11,15 @@ class App extends Component {
     return (
       <div>
 
-        <Link to="http://github.com/guilhermemalfatti" className="float-github">
+        <a href="http://github.com/guilhermemalfatti" className="float-github" target="_blank">
           <i className="fa fa-github"></i>
-        </Link>
-        <Link to="http://www.linkedin.com/in/guilherme-malfatti-b2683966" className="float-linkedin">
+        </a>
+        <a href="http://www.linkedin.com/in/guilherme-malfatti-b2683966" className="float-linkedin" target="_blank">
           <i className="fa fa-linkedin"></i>
-        </Link>
+        </a>
+        <a href={process.env.PUBLIC_URL + '/'} className="float-home">
+          <i className="fa fa-home"></i>
+        </a>
 
         <Route path={process.env.PUBLIC_URL + '/:category'} component={Header} />
         <Route exact path={process.env.PUBLIC_URL + '/'} component={Header} />
