@@ -6,7 +6,11 @@ import { API_ENDPOINT } from '../config/config';
 const uuidv4 = require('uuid/v4');
 const options = { headers: { "Authorization": token } };
 
-
+/**
+ * Method responsible for vote in a post
+ * @param {*} postId The post id
+ * @param {*} vote the vote
+ */
 export function postVote(postId, vote) {
     return (dispatch) => {
         //that aims to avoid an if/else statement
@@ -19,6 +23,11 @@ export function postVote(postId, vote) {
     }
 }
 
+/**
+ * Method responsible for create a new post
+ * @param {*} values The values
+ * @param {*} history The DOM history
+ */
 export function addPost(values, history) {
     values['id'] = uuidv4();
     values['timestamp'] = new Date().getTime();
@@ -36,6 +45,12 @@ export function addPost(values, history) {
     }
 }
 
+/**
+ * Method responsible for edita  post
+ * @param {*} values The values
+ * @param {*} id The post id
+ * @param {*} history The DOM history
+ */
 export function editPost(values, id, history) {
 
     return (dispatch) => {
@@ -47,6 +62,10 @@ export function editPost(values, id, history) {
     }
 }
 
+/**
+ * Method responsible for delete a post
+ * @param {*} id The post id
+ */
 export function deletePost(id) {
     return (dispatch) => {
         //remove from state
@@ -58,6 +77,10 @@ export function deletePost(id) {
     }
 }
 
+/**
+ * Method responsible for return a specific post
+ * @param {*} id The post id
+ */
 export function selectPost(id) {
     return (dispatch) => {
         dispatch(ActionCreator.requestData());

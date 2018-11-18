@@ -21,6 +21,9 @@ class Posts extends Component {
 
     }
 
+    /**
+     * Method responsible for select a filter to sort the posts
+     */
     selectFilter = (filter) => {
         this.setState(() => ({ sortByDesc: filter }));
         let { dispatch } = this.props;
@@ -28,11 +31,17 @@ class Posts extends Component {
         dispatch(ActionCreator.sortPost(filter));
     }
 
+    /**
+     * Method responsible for add a vote in a post
+     */
     voteItem = (postId, vote) => {
         let { dispatch } = this.props;
         dispatch(postVote(postId, vote));
     }
 
+    /**
+     * Method responsible for filter the posts
+     */
     filterList = (event) => {
         let { dispatch } = this.props;
         var updatedList = this.props.originalPosts;
@@ -49,6 +58,9 @@ class Posts extends Component {
         dispatch(ActionCreator.updateList(updatedList));
     }
 
+    /**
+     * Method responsible for reset the filter
+     */
     resetFilter = () => {
         let { dispatch } = this.props;
         this.setState({

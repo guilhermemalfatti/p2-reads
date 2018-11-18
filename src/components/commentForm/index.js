@@ -49,6 +49,10 @@ class CommentForm extends Component {
         this.setState({ author: event.target.value });
     }
 
+    /**
+     * Method responsible for handle the form submit
+     * @param {*} e The event
+     */
     handleSubmit(e) {
         const { dispatch, edititngComment, comment, selectedPost } = this.props;
         e.preventDefault()
@@ -66,6 +70,9 @@ class CommentForm extends Component {
         this.clearForm();
     }
 
+    /**
+     * Method responsible for clear the form
+     */
     clearForm() {
         let { cancelCommentEdit } = this.props;
 

@@ -45,6 +45,9 @@ class PostsPage extends Component {
         dispatch(getComments(post_id));
     }
 
+    /**
+     * Method responsible for toggle the comments in a post
+     */
     toggleComments() {
         this.setState((state) => ({
             hideComment: !state.hideComment,
@@ -52,6 +55,9 @@ class PostsPage extends Component {
         }))
     }
 
+    /**
+     * Method responsible for handle the a vote in a post
+     */
     vote = (postId, vote) => {
         let { dispatch } = this.props;
         dispatch(postVote(postId, vote));
@@ -69,10 +75,17 @@ class PostsPage extends Component {
         dispatch(commentVote(commentId, vote));
     }
 
+    /**
+     * Method responsible for format a date
+     * @param timestamp The date
+     */
     postDate = (timestamp) => {
         return moment(timestamp).format('YY/MM/DD HH:mm:ss');
     }
 
+    /**
+     * Method responsible for delete a post
+     */
     deletePost = (id) => {
         const { dispatch } = this.props
 
@@ -80,6 +93,9 @@ class PostsPage extends Component {
         dispatch(deletePost(id));
     }
 
+    /**
+     * Method responsible for edit a post
+     */
     editPost = () => {
         this.setState({
             editing: true
@@ -87,12 +103,18 @@ class PostsPage extends Component {
 
     }
 
+    /**
+     * Method responsible for cancel edition
+     */
     cancelEdit = () => {
         this.setState({
             editing: false
         });
     }
 
+    /**
+     * Method responsible for set the state to editing
+     */
     setEditComment = (comment) => {
         this.setState({
             commentBeingEdited: comment,
@@ -100,6 +122,9 @@ class PostsPage extends Component {
         })
     }
 
+    /**
+     * Method responsible for set the state not editing
+     */
     cancelCommentEdit = () => {
         this.setState({
             commentBeingEdited: null,
@@ -107,6 +132,9 @@ class PostsPage extends Component {
         })
     }
 
+    /**
+     * Method responsible for delete a comment
+     */
     deleteComment = (comment) => {
         const { dispatch } = this.props
 

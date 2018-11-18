@@ -5,6 +5,12 @@ const INITIAL_STATE = {
     isLoading: true
 }
 
+
+/**
+ * Method responsible for return the new state when loading is off
+ * @param {*} state The current state
+ * @param {*} action The action
+ */
 const loadingOff = (state = INITIAL_STATE, action) => {
     return {
         ...state,
@@ -12,6 +18,11 @@ const loadingOff = (state = INITIAL_STATE, action) => {
     }
 }
 
+/**
+ * Method responsible for return the new state when loading is on
+ * @param {*} state The current state
+ * @param {*} action The action
+ */
 const loadingOn = (state = INITIAL_STATE, action) => {
     return {
         ...state,

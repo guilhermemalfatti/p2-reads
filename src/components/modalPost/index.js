@@ -70,10 +70,16 @@ class ModalPost extends Component {
     this.setState({ category: event.target.value });
   }
 
+  /**
+   * Method responsible for handle state when the modal is show
+   */
   handleShow() {
     this.setState({ show: true });
   }
 
+  /**
+   * Method responsible for for handle the state when the mdoal is hide
+   */
   handleHide() {
     let { cancelEdit } = this.props;
     this.setState({ show: false });
@@ -82,6 +88,10 @@ class ModalPost extends Component {
     }
   }
 
+  /**
+   * Method responsible for handle the form submit
+   * @param {*} e The event
+   */
   handleSubmit = (e) => {
     const { dispatch, history, editing, selectedPost } = this.props;
     e.preventDefault()
