@@ -11,7 +11,7 @@ import { postVote } from '../../actions/post';
 import ModalPost from '../modalPost/index';
 import CommentForm from '../commentForm/index';
 import List from '../list/index';
-import { defineColor } from '../../util/index';
+import defineColor from '../../util/index';
 import PropTypes from 'prop-types';
 
 class PostsPage extends Component {
