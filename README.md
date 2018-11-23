@@ -56,6 +56,14 @@ $ npm start
 
 Your app should now be running on [localhost:3000](http://localhost:3000/).
 
+## Tests
+In order to run unit tests, follow the commands bellow:
+```sh
+$ git clone git@github.com:guilhermemalfatti/p2-reads.git # or clone your own fork
+$ cd p2-reads
+$ npm test
+```
+
 ## References
 
 For more information about using Node.js and React, see these Dev Center articles:
