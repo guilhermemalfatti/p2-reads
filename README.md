@@ -1,6 +1,7 @@
 ## P2 reads
 
 Available on: https://p2-reads.herokuapp.com/
+obs: Since the application is unused for a while, its get unloaded from the server memory, so the first time that you will open the app wil take a little longer.
 
 ## Guilherme Malfatti - Udacity
 
@@ -64,5 +65,5 @@ For more information about using Node.js and React, see these Dev Center article
 
 ## TODO
 - Mechanism of error message
-- Add JSDocs in all files
+- Unit Tests (coverage > 80%)
 
