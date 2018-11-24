@@ -20,22 +20,13 @@ class PostsPage extends Component {
         comments: PropTypes.array.isRequired,
         isLoading: PropTypes.bool.isRequired
     }
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            editing: false,
-            hideComment: false,
-            labelHideComment: 'Hide Comments',
-            commentBeingEdited: {},
-            edititngComment: false
-        };
-
-        this.toggleComments = this.toggleComments.bind(this);
-        this.setEditComment = this.setEditComment.bind(this);
-        this.commentVote = this.commentVote.bind(this);
-    }
+    state = {
+        editing: false,
+        hideComment: false,
+        labelHideComment: 'Hide Comments',
+        commentBeingEdited: {},
+        edititngComment: false
+    };
 
     componentDidMount() {
         const { post_id } = this.props.match.params
@@ -48,7 +39,7 @@ class PostsPage extends Component {
     /**
      * Method responsible for toggle the comments in a post
      */
-    toggleComments() {
+    toggleComments = () => {
         this.setState((state) => ({
             hideComment: !state.hideComment,
             labelHideComment: !state.hideComment === true ? "Show Comments" : "Hide Comments"
@@ -69,7 +60,7 @@ class PostsPage extends Component {
      * @param {object} postId - The comment id
      * @param {object} vote - The vote
      */
-    commentVote(commentId, vote) {
+    commentVote = (commentId, vote) => {
         let { onCommentVote } = this.props;
 
         onCommentVote(commentId, vote);
