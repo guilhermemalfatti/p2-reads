@@ -5,8 +5,10 @@ import { API_ENDPOINT } from '../config/config';
 
 const options = { headers: { "Authorization": token } };
 
-
-export default function getCategories(postId, vote) {
+/**
+ * Method resposible to get the categories from API
+ */
+export default function getCategories() {
     return (dispatch) => {
 
         return axios.get(

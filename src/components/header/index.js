@@ -14,28 +14,28 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        const { dispatch, originalPosts } = this.props
+        const { onGetCategories, originalPosts, onReceiveInitialData } = this.props
         const { category } = this.props.match.params;
 
         //in order to request initial data, only in the first time.
         if (originalPosts.length === 0) {
-            dispatch(receiveInitialData(category));
+            onReceiveInitialData(category);
         }
 
-        dispatch(getCategories());
+        onGetCategories();
     }
 
     filter = (category) => {
         let { originalPosts } = this.props;
         let filteredPosts;
-        const { dispatch } = this.props
+        const { onUpdateList, onSelectCategory } = this.props
         if (category === 'all' || !category) {
-            dispatch(ActionCreator.updateList(originalPosts));
+            onUpdateList(originalPosts);
         } else {
             filteredPosts = originalPosts.filter((item) => item.category === category);
-            dispatch(ActionCreator.updateList(filteredPosts));
+            onUpdateList(filteredPosts);
         }
-        dispatch(ActionCreator.selectCategory(category));
+        onSelectCategory(category);
     }
 
     render() {
@@ -74,7 +74,24 @@ class Header extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onReceiveInitialData: category => {
+            dispatch(receiveInitialData(category))
+        },
+        onGetCategories: () => {
+            dispatch(getCategories())
+        },
+        onUpdateList: posts => {
+            dispatch(ActionCreator.updateList(posts));
+        },
+        onSelectCategory: category => {
+            dispatch(ActionCreator.selectCategory(category));
+        }
+    }
+}
+
 export default connect((state) => ({
     categories: state.categories.items,
     originalPosts: state.posts.originalList
-}))(Header)
+}), mapDispatchToProps)(Header)

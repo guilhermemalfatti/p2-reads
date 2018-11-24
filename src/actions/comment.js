@@ -5,6 +5,10 @@ import { API_ENDPOINT } from '../config/config';
 
 const options = { headers: { "Authorization": token } };
 
+/**
+ * Method responsible for get the comments by post id
+ * @param {*} postId the post id
+ */
 export function getComments(postId) {
     return (dispatch) => {
         dispatch(ActionCreator.requestData());
@@ -19,7 +23,11 @@ export function getComments(postId) {
     }
 }
 
-
+/**
+ * Method responsible for edit a comment
+ * @param {*} commentId  The comment Id
+ * @param {*} values The values
+ */
 export function editComment(commentId, values) {
     return (dispatch) => {
         dispatch(ActionCreator.editComment(commentId, values));
@@ -30,6 +38,10 @@ export function editComment(commentId, values) {
     }
 }
 
+/**
+ * Method responsible for create a new comment
+ * @param {*} values The values
+ */
 export function newComment(values) {
     //if there is no author, add ananymous value
     if (!values.author) {
@@ -46,6 +58,10 @@ export function newComment(values) {
     }
 }
 
+/**
+ * Method responsible for delete  a comment
+ * @param {*} comment The comment
+ */
 export function deleteComment(comment) {
     return (dispatch) => {
         //remove from state
@@ -57,6 +73,11 @@ export function deleteComment(comment) {
     }
 }
 
+/**
+ * Method responsible for add a vote in a comment
+ * @param {*} comment The comment
+ * @param {*} vote The vote
+ */
 export function commentVote(comment, vote) {
     return (dispatch) => {
         //that aims to avoid an if/else statement

@@ -11,7 +11,7 @@ import { postVote } from '../../actions/post';
 import ModalPost from '../modalPost/index';
 import CommentForm from '../commentForm/index';
 import List from '../list/index';
-import { defineColor } from '../../util/index';
+import defineColor from '../../util/index';
 import PropTypes from 'prop-types';
 
 class PostsPage extends Component {
@@ -20,42 +20,39 @@ class PostsPage extends Component {
         comments: PropTypes.array.isRequired,
         isLoading: PropTypes.bool.isRequired
     }
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            editing: false,
-            hideComment: false,
-            labelHideComment: 'Hide Comments',
-            commentBeingEdited: {},
-            edititngComment: false
-        };
-
-        this.toggleComments = this.toggleComments.bind(this);
-        this.setEditComment = this.setEditComment.bind(this);
-        this.commentVote = this.commentVote.bind(this);
-    }
+    state = {
+        editing: false,
+        hideComment: false,
+        labelHideComment: 'Hide Comments',
+        commentBeingEdited: {},
+        edititngComment: false
+    };
 
     componentDidMount() {
         const { post_id } = this.props.match.params
-        const { dispatch } = this.props
+        const { onSelectPost, onGetComments } = this.props
 
-        dispatch(selectPost(post_id));
-        dispatch(getComments(post_id));
+        onSelectPost(post_id);
+        onGetComments(post_id);
     }
 
-    toggleComments() {
+    /**
+     * Method responsible for toggle the comments in a post
+     */
+    toggleComments = () => {
         this.setState((state) => ({
             hideComment: !state.hideComment,
             labelHideComment: !state.hideComment === true ? "Show Comments" : "Hide Comments"
         }))
     }
 
+    /**
+     * Method responsible for handle the a vote in a post
+     */
     vote = (postId, vote) => {
-        let { dispatch } = this.props;
-        dispatch(postVote(postId, vote));
-        dispatch(ActionCreator.voteSelectedPost(vote));
+        let { onVoteSelectedPost, onPostVote } = this.props;
+        onPostVote(postId, vote);
+        onVoteSelectedPost(vote);
     }
 
     /**
@@ -63,23 +60,33 @@ class PostsPage extends Component {
      * @param {object} postId - The comment id
      * @param {object} vote - The vote
      */
-    commentVote(commentId, vote) {
-        let { dispatch } = this.props;
+    commentVote = (commentId, vote) => {
+        let { onCommentVote } = this.props;
 
-        dispatch(commentVote(commentId, vote));
+        onCommentVote(commentId, vote);
     }
 
+    /**
+     * Method responsible for format a date
+     * @param timestamp The date
+     */
     postDate = (timestamp) => {
         return moment(timestamp).format('YY/MM/DD HH:mm:ss');
     }
 
+    /**
+     * Method responsible for delete a post
+     */
     deletePost = (id) => {
-        const { dispatch } = this.props
+        const { onDeletePost } = this.props
 
         //api call
-        dispatch(deletePost(id));
+        onDeletePost(id);
     }
 
+    /**
+     * Method responsible for edit a post
+     */
     editPost = () => {
         this.setState({
             editing: true
@@ -87,12 +94,18 @@ class PostsPage extends Component {
 
     }
 
+    /**
+     * Method responsible for cancel edition
+     */
     cancelEdit = () => {
         this.setState({
             editing: false
         });
     }
 
+    /**
+     * Method responsible for set the state to editing
+     */
     setEditComment = (comment) => {
         this.setState({
             commentBeingEdited: comment,
@@ -100,6 +113,9 @@ class PostsPage extends Component {
         })
     }
 
+    /**
+     * Method responsible for set the state not editing
+     */
     cancelCommentEdit = () => {
         this.setState({
             commentBeingEdited: null,
@@ -107,11 +123,14 @@ class PostsPage extends Component {
         })
     }
 
+    /**
+     * Method responsible for delete a comment
+     */
     deleteComment = (comment) => {
-        const { dispatch } = this.props
+        const { onDeleteComment } = this.props
 
         //api call
-        dispatch(deleteComment(comment));
+        onDeleteComment(comment);
     }
 
     render() {
@@ -203,8 +222,36 @@ class PostsPage extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSelectPost: post_id => {
+            dispatch(selectPost(post_id));
+
+        },
+        onGetComments: post_id => {
+            dispatch(getComments(post_id));
+        },
+        onPostVote: (postId, vote) => {
+            dispatch(postVote(postId, vote));
+        },
+        onVoteSelectedPost: vote => {
+            dispatch(ActionCreator.voteSelectedPost(vote));
+        },
+        onCommentVote: (commentId, vote) => {
+            dispatch(commentVote(commentId, vote));
+        },
+        onDeletePost: id => {
+            dispatch(deletePost(id));
+        },
+        onDeleteComment: comment => {
+            dispatch(deleteComment(comment));
+        }
+    }
+}
+
 export default connect((state) => ({
     isLoading: state.loading.isLoading,
     post: state.posts.selectedPost || {},
     comments: state.comment.items || []
-}))(PostsPage)
+}), mapDispatchToProps)(PostsPage)

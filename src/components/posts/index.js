@@ -6,7 +6,7 @@ import { postVote } from '../../actions/post';
 import { connect } from 'react-redux';
 import ActionCreator from '../../actions/actionCreators';
 import ModalPost from '../modalPost/index';
-import { defineColor } from '../../util/index';
+import defineColor from '../../util/index';
 import PropTypes from 'prop-types';
 
 class Posts extends Component {
@@ -21,20 +21,29 @@ class Posts extends Component {
 
     }
 
+    /**
+     * Method responsible for select a filter to sort the posts
+     */
     selectFilter = (filter) => {
         this.setState(() => ({ sortByDesc: filter }));
-        let { dispatch } = this.props;
+        let { onSortPost } = this.props;
 
-        dispatch(ActionCreator.sortPost(filter));
+        onSortPost(filter);
     }
 
+    /**
+     * Method responsible for add a vote in a post
+     */
     voteItem = (postId, vote) => {
-        let { dispatch } = this.props;
-        dispatch(postVote(postId, vote));
+        let { onPostVote } = this.props;
+        onPostVote(postId, vote);
     }
 
+    /**
+     * Method responsible for filter the posts
+     */
     filterList = (event) => {
-        let { dispatch } = this.props;
+        let { onUpdateList } = this.props;
         var updatedList = this.props.originalPosts;
 
         this.setState({
@@ -46,16 +55,19 @@ class Posts extends Component {
                 event.target.value.toLowerCase()) !== -1;
         });
 
-        dispatch(ActionCreator.updateList(updatedList));
+        onUpdateList(updatedList);
     }
 
+    /**
+     * Method responsible for reset the filter
+     */
     resetFilter = () => {
-        let { dispatch } = this.props;
+        let { onUpdateList } = this.props;
         this.setState({
             searchValue: ''
         });
 
-        dispatch(ActionCreator.updateList(this.props.originalPosts));
+        onUpdateList(this.props.originalPosts);
     }
 
     render() {
@@ -71,7 +83,7 @@ class Posts extends Component {
                             <input value={this.state.searchValue} type="text" onChange={this.filterList} placeholder="Have a question? Search for post by keywords" />
                         </div>
                         <button onClick={this.resetFilter}>Reset</button>
-                        <ModalPost showModal={false}/>
+                        <ModalPost showModal={false} />
                         <div className="dropdown">
                             <button className="dropbtn">{sortByDesc}<span className="caret"></span></button>
                             <div className="dropdown-content">
@@ -97,8 +109,24 @@ class Posts extends Component {
     }
 }
 
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSortPost: filter => {
+            dispatch(ActionCreator.sortPost(filter));
+        },
+        onPostVote: (postId, vote) => {
+            dispatch(postVote(postId, vote));
+        },
+        onUpdateList: updatedList =>{
+            dispatch(ActionCreator.updateList(updatedList));
+        }
+
+    }
+}
+
 export default connect((state) => ({
     posts: state.posts.items,
     originalPosts: state.posts.originalList,
     isLoading: state.loading.isLoading
-}))(Posts)
+}), mapDispatchToProps)(Posts)

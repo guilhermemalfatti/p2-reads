@@ -49,23 +49,30 @@ class CommentForm extends Component {
         this.setState({ author: event.target.value });
     }
 
+    /**
+     * Method responsible for handle the form submit
+     * @param {*} e The event
+     */
     handleSubmit(e) {
-        const { dispatch, edititngComment, comment, selectedPost } = this.props;
+        const { onEditComment, edititngComment, comment, selectedPost, onNewComment } = this.props;
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
         values['timestamp'] = new Date().getTime();
 
         if (edititngComment) {
-            dispatch(editComment(comment.id, values));
+            onEditComment(comment.id, values);
         } else {
             values['id'] = uuidv4();
             values['parentId'] = selectedPost.id;
-            dispatch(newComment(values));
+            onNewComment(values);
         }
 
         this.clearForm();
     }
 
+    /**
+     * Method responsible for clear the form
+     */
     clearForm() {
         let { cancelCommentEdit } = this.props;
 
@@ -99,6 +106,17 @@ class CommentForm extends Component {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        onEditComment: (id, values) => {
+            dispatch(editComment(id, values));
+        },
+        onNewComment: values => {
+            dispatch(newComment(values));
+        }
+    }
+}
+
 export default connect((state) => ({
     selectedPost: state.posts.selectedPost || {}
-}))(CommentForm)
+}), mapDispatchToProps)(CommentForm)
