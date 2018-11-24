@@ -28,7 +28,19 @@ const downVote = (state = INITIAL_STATE, action) => {
     ...state,
     items: state.items.map((item) => {
       if (item.id === action.id) {
-        item.voteScore -= 1;
+        return {
+          ...item,
+          voteScore: item.voteScore - 1
+        };
+      }
+      return item;
+    }),
+    originalList: state.originalList.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          voteScore: item.voteScore - 1
+        };
       }
       return item;
     })
@@ -40,7 +52,19 @@ const upVote = (state = INITIAL_STATE, action) => {
     ...state,
     items: state.items.map((item) => {
       if (item.id === action.id) {
-        item.voteScore += 1;
+        return {
+          ...item,
+          voteScore: item.voteScore + 1
+        }
+      }
+      return item;
+    }),
+    originalList: state.originalList.map((item) => {
+      if (item.id === action.id) {
+        return {
+          ...item,
+          voteScore: item.voteScore + 1
+        };
       }
       return item;
     })
@@ -115,15 +139,21 @@ const editPost = (state = INITIAL_STATE, action) => {
     ...state,
     items: state.items.map((item) => {
       if (item.id === action.id) {
-        item.title = action.values.title;
-        item.body = action.values.body;
+        return{
+          ...item,
+          title: action.values.title,
+          body: action.values.body
+        }
       }
       return item;
     }),
     originalList: state.originalList.map((item) => {
       if (item.id === action.id) {
-        item.title = action.values.title;
-        item.body = action.values.body;
+        return{
+          ...item,
+          title: action.values.title,
+          body: action.values.body
+        }
       }
       return item;
     }),
@@ -140,7 +170,19 @@ const addComment = (state = INITIAL_STATE, action) => {
       ...state,
       items: state.items.map((item) => {
         if (item.id === action.comment.parentId) {
-          item.commentCount += 1;
+          return{
+            ...item,
+            commentCount: item.commentCount + 1
+          }
+        }
+        return item;
+      }),
+      originalList: state.items.map((item) => {
+        if (item.id === action.comment.parentId) {
+          return{
+            ...item,
+            commentCount: item.commentCount + 1
+          }
         }
         return item;
       }),
@@ -158,7 +200,19 @@ const deleteComment = (state = INITIAL_STATE, action) => {
       ...state,
       items: state.items.map((item) => {
         if (item.id === action.comment.parentId) {
-          item.commentCount -= 1;
+          return{
+            ...item,
+            commentCount: item.commentCount - 1
+          }
+        }
+        return item;
+      }),
+      originalList: state.items.map((item) => {
+        if (item.id === action.comment.parentId) {
+          return{
+            ...item,
+            commentCount: item.commentCount - 1
+          }
         }
         return item;
       }),

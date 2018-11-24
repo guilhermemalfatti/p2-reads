@@ -24,8 +24,11 @@ const editComment = (state = INITIAL_STATE, action) => {
         ...state,
         items: state.items.map((item) => {
             if (item.id === action.commentId) {
-                item.body = action.values.body;
-                item.timestamp = action.values.timestamp;
+                return {
+                    ...item,
+                    body: action.values.body,
+                    timestamp: action.values.timestamp
+                }
             }
             return item;
         })
@@ -41,27 +44,33 @@ const deleteComment = (state = INITIAL_STATE, action) => {
 
 const downVote = (state = INITIAL_STATE, action) => {
     return {
-      ...state,
-      items: state.items.map((item) => {
-        if (item.id === action.id) {
-          item.voteScore -= 1;
-        }
-        return item;
-      })
+        ...state,
+        items: state.items.map((item) => {
+            if (item.id === action.id) {
+                return{
+                    ...item,
+                    voteScore: item.voteScore - 1
+                }
+            }
+            return item;
+        })
     }
-  }
+}
 
-  const upVote = (state = INITIAL_STATE, action) => {
+const upVote = (state = INITIAL_STATE, action) => {
     return {
-      ...state,
-      items: state.items.map((item) => {
-        if (item.id === action.id) {
-          item.voteScore += 1;
-        }
-        return item;
-      })
+        ...state,
+        items: state.items.map((item) => {
+            if (item.id === action.id) {
+                return {
+                    ...item,
+                    voteScore: item.voteScore + 1
+                }
+            }
+            return item;
+        })
     }
-  }
+}
 
 
 
