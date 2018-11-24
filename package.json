@@ -22,8 +22,14 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "expect": "^23.6.0",
     "gh-pages": "^2.0.1",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "moxios": "^0.4.0",
+    "react-test-renderer": "^16.6.3",
+    "redux-mock-store": "^1.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,5 +47,11 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  }
 }

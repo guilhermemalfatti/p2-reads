@@ -46,7 +46,7 @@ export function addPost(values, history) {
 }
 
 /**
- * Method responsible for edita  post
+ * Method responsible for edit a  post
  * @param {*} values The values
  * @param {*} id The post id
  * @param {*} history The DOM history
@@ -84,7 +84,7 @@ export function deletePost(id) {
 export function selectPost(id) {
     return (dispatch) => {
         dispatch(ActionCreator.requestData());
-        axios.get(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, options)
+        return axios.get(API_ENDPOINT.READABLE_STARTER + '/posts/' + id, options)
             .then((res) => {
                 dispatch(ActionCreator.selectPost(res.data));
             })

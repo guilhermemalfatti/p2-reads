@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List render snapshot - comment 1`] = `
+<li>
+  <div
+    className="user-comment undefined"
+  >
+    <div
+      className="comment-votes"
+    >
+      <div
+        className="upvote"
+        onClick={[Function]}
+      />
+      <div
+        className="number-of-votes"
+      >
+        5
+      </div>
+      <div
+        className="downvote"
+        onClick={[Function]}
+      />
+    </div>
+    <img
+      alt=""
+      src="https://cdn1.iconfinder.com/data/icons/flat-business-icons/128/user-32.png"
+    />
+    <header>
+      <a
+        className="name"
+      />
+      <span>
+        31/12/69 22:07:45
+      </span>
+    </header>
+    <div
+      className="content"
+    >
+      <p />
+    </div>
+    <a
+      className="edit"
+      onClick={[Function]}
+    >
+      edit
+    </a>
+    <a
+      className="delete"
+      onClick={[Function]}
+    >
+      delete
+    </a>
+  </div>
+</li>
+`;

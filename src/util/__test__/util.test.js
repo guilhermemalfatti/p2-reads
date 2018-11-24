@@ -1,4 +1,4 @@
-const defineColor = require('../src/util');
+const defineColor = require('../index');
 
 test('Define color green', () => {
   expect(defineColor(3)).toBe('green');
