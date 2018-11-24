@@ -93,15 +93,15 @@ class ModalPost extends Component {
    * @param {*} e The event
    */
   handleSubmit = (e) => {
-    const { dispatch, history, editing, selectedPost } = this.props;
+    const { onEditPost, onAddPost, history, editing, selectedPost } = this.props;
     e.preventDefault()
     const values = serializeForm(e.target, { hash: true })
 
     if (editing) {
-      dispatch(editPost(values, selectedPost.id, history));
+      onEditPost(values, selectedPost.id, history);
       this.handleHide();
     } else {
-      dispatch(addPost(values, history));
+      onAddPost(values, history);
     }
 
   }
@@ -151,7 +151,19 @@ class ModalPost extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onEditPost: (values, id, history) => {
+      dispatch(editPost(values, id, history));
+    },
+    onAddPost: (values, history) => {
+      dispatch(addPost(values, history));
+    }
+  }
+}
+
+
 export default withRouter(connect((state) => ({
   categories: state.categories.items,
   selectedPost: state.posts.selectedPost || {}
-}))(ModalPost))
+}), mapDispatchToProps)(ModalPost))

@@ -39,10 +39,10 @@ class PostsPage extends Component {
 
     componentDidMount() {
         const { post_id } = this.props.match.params
-        const { dispatch } = this.props
+        const { onSelectPost, onGetComments } = this.props
 
-        dispatch(selectPost(post_id));
-        dispatch(getComments(post_id));
+        onSelectPost(post_id);
+        onGetComments(post_id);
     }
 
     /**
@@ -59,9 +59,9 @@ class PostsPage extends Component {
      * Method responsible for handle the a vote in a post
      */
     vote = (postId, vote) => {
-        let { dispatch } = this.props;
-        dispatch(postVote(postId, vote));
-        dispatch(ActionCreator.voteSelectedPost(vote));
+        let { onVoteSelectedPost, onPostVote } = this.props;
+        onPostVote(postId, vote);
+        onVoteSelectedPost(vote);
     }
 
     /**
@@ -70,9 +70,9 @@ class PostsPage extends Component {
      * @param {object} vote - The vote
      */
     commentVote(commentId, vote) {
-        let { dispatch } = this.props;
+        let { onCommentVote } = this.props;
 
-        dispatch(commentVote(commentId, vote));
+        onCommentVote(commentId, vote);
     }
 
     /**
@@ -87,10 +87,10 @@ class PostsPage extends Component {
      * Method responsible for delete a post
      */
     deletePost = (id) => {
-        const { dispatch } = this.props
+        const { onDeletePost } = this.props
 
         //api call
-        dispatch(deletePost(id));
+        onDeletePost(id);
     }
 
     /**
@@ -136,10 +136,10 @@ class PostsPage extends Component {
      * Method responsible for delete a comment
      */
     deleteComment = (comment) => {
-        const { dispatch } = this.props
+        const { onDeleteComment } = this.props
 
         //api call
-        dispatch(deleteComment(comment));
+        onDeleteComment(comment);
     }
 
     render() {
@@ -231,8 +231,36 @@ class PostsPage extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSelectPost: post_id => {
+            dispatch(selectPost(post_id));
+
+        },
+        onGetComments: post_id => {
+            dispatch(getComments(post_id));
+        },
+        onPostVote: (postId, vote) => {
+            dispatch(postVote(postId, vote));
+        },
+        onVoteSelectedPost: vote => {
+            dispatch(ActionCreator.voteSelectedPost(vote));
+        },
+        onCommentVote: (commentId, vote) => {
+            dispatch(commentVote(commentId, vote));
+        },
+        onDeletePost: id => {
+            dispatch(deletePost(id));
+        },
+        onDeleteComment: comment => {
+            dispatch(deleteComment(comment));
+        }
+    }
+}
+
 export default connect((state) => ({
     isLoading: state.loading.isLoading,
     post: state.posts.selectedPost || {},
     comments: state.comment.items || []
-}))(PostsPage)
+}), mapDispatchToProps)(PostsPage)
