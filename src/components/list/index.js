@@ -41,7 +41,7 @@ export default function List(props) {
         return (
             <React.Fragment>
                 {props.items && props.items.map((item, index) => (
-                    <li key={index}>
+                    <li key={item.id}>
                         <div className={`user-comment ${item.voteScore > 2 ? style.green : item.voteScore >= 0 && item.voteScore <= 2 ? style.yellow : style.red}`}>
                             <div className="comment-votes">
                                 <div className="upvote" onClick={() => props.vote(item.id, 'upVote')}></div>
